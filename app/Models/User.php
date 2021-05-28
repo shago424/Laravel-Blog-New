@@ -26,6 +26,7 @@ class User extends Authenticatable
         'address',
         'image',
         'ocap',
+        'role_id',
     ];
 
     /**
