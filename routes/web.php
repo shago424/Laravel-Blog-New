@@ -25,10 +25,32 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'admin'],function(){ 
     Route::get('dashboard',[App\Http\Controllers\admin\AdminDashboardController::class,'index'])->name('admin.dashboard');
-    // user section
+  
+
+
+     // Category section
+
+    Route::get('category-list',[App\Http\Controllers\admin\CategoryController::class,'index'])->name('category.list');
+    Route::get('category-create',[App\Http\Controllers\admin\CategoryController::class,'create'])->name('category.create');
+     Route::post('category/store',[App\Http\Controllers\admin\CategoryController::class,'store'])->name('category.store');
+    Route::post('category/update/{id}',[App\Http\Controllers\admin\CategoryController::class,'update'])->name('category.update');
+    Route::get('category/delete/{id}',[App\Http\Controllers\admin\CategoryController::class,'delete'])->name('category.delete');
+     Route::get('category/active/{id}',[App\Http\Controllers\admin\CategoryController::class,'active'])->name('category.active');
+     Route::get('category/inactive/{id}',[App\Http\Controllers\admin\CategoryController::class,'inactive'])->name('category.inactive');
+    
+
+
+
+
+
+    // Category section
+
     Route::get('user-list',[App\Http\Controllers\admin\UserController::class,'index'])->name('user.list');
+    Route::get('user-create',[App\Http\Controllers\admin\UserController::class,'create'])->name('user.create');
     Route::post('update/{id}',[App\Http\Controllers\admin\UserController::class,'update'])->name('user.update');
     Route::get('delete/{id}',[App\Http\Controllers\admin\UserController::class,'delete'])->name('user.delete');
+    Route::get('active/{id}',[App\Http\Controllers\admin\UserController::class,'active'])->name('user.active');
+    Route::get('inactive/{id}',[App\Http\Controllers\admin\UserController::class,'inactive'])->name('user.inactive');
 
 
 });

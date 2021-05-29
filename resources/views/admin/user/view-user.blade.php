@@ -26,7 +26,7 @@
             </div>
         </div>
 
-         @if(Session::get('success'))
+         {{-- @if(Session::get('success'))
                <div class="alert alert-success alert-dismissible">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
               <strong>{{session::get('success')}}</strong> </div> 
@@ -36,7 +36,7 @@
                <div class="alert alert-danger alert-dismissible">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
               <strong>{{session::get('error')}}</strong> </div> 
-            @endif
+            @endif --}}
 
          <div class="content mt-3">
             <div class="animated fadeIn">
@@ -76,11 +76,11 @@
                                              @endif
                                           </td>
                                             <td class="text-center">
-                                            {{-- @if($user->status == 1)
-                                            <a href="{{ route('user.inactive',$user->id) }}" class="btn btn-xs btn-warning"><i class="fa fa-arrow-down"></i></a>
+                                            @if($user->status == 1)
+                                            <a href="{{ route('user.inactive',$user->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-arrow-down"></i></a>
                                             @else
-                                             <a href="{{ route('user.active',$user->id) }}" class="btn btn-xs btn-success"><i class="fa fa-arrow-up"></i></a>
-                                            @endif --}}
+                                             <a href="{{ route('user.active',$user->id) }}" class="btn btn-sm btn-success"><i class="fa fa-arrow-up"></i></a>
+                                            @endif
                                              <button type="button" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#viewuser-{{ $user->id }}">
                                                     <i class="fa fa-eye"></i>
                                             </button>
@@ -147,15 +147,15 @@
                               
                                    
                                     <div class="card-body card-block" >
-                                        <form action="{{-- {{ route('user.update',$user->id) }} --}}" method="post" class="form-horizontal" id="editUser-{{ $user->id }}">
+                                        <form action="{{ route('user.update',$user->id) }}" method="post" class="form-horizontal" id="editUser-{{ $user->id }}">
                                             @csrf
                                             {{-- @method('put') --}}
-                                            {{--  <div class="row form-group">
-                                                <div class="col col-md-3"><label for="name" class=" form-control-label">User Name</label></div>
+                                             <div class="row form-group">
+                                                <div class="col col-md-3"><label for="name" class=" form-control-label">Name</label></div>
                                                 <div class="col-12 col-md-9"><input type="text" id="name" name="name" placeholder="Enter Name" class="form-control" value="{{ $user->name }}" disabled=""><span class="help-block"><font style="color:red">{{($errors)->has('name')?($errors->first('name')):''}}</font></span></div>
-                                            </div> --}}
+                                            </div>
                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="user Name" class=" form-control-label">User Name</label></div>
+                                                <div class="col col-md-3"><label for="user Name" class=" form-control-label">User ID</label></div>
                                                 <div class="col-12 col-md-9"><input type="text" id="user_id" name="user_id" placeholder="Enter User Name" class="form-control" value="{{ $user->user_id }}"><span class="help-block"><font style="color:red">{{($errors)->has('user_id')?($errors->first('user_id')):''}}</font></span></div>
                                             </div>
                                             <div class="row form-group">

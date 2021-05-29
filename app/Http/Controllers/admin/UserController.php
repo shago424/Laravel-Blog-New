@@ -15,7 +15,7 @@ class UserController extends Controller
     $users = User::with('role')->get();
     $roles = Role::all();
 
-        return view('admin.view-user',compact('users','roles'));
+        return view('admin.user.view-user',compact('users','roles'));
 
     }
 
@@ -30,7 +30,7 @@ class UserController extends Controller
 
         $user = User::find($id);
         if(Auth::user()->id ==$id){
-            Toastr::error('Error', 'Upadated No Permission');
+            Toastr::error('Upadated No Permission');
             return redirect()->back();
         }
         $user->user_id = $request->user_id;
@@ -39,7 +39,7 @@ class UserController extends Controller
         $user->updated_by = Auth::user()->id;
         $user->save();
 
-        Toastr::success('Success', 'User Updated Successfully');
+        Toastr::success('User Updated Successfully');
             return redirect()->back();
 
      
@@ -47,18 +47,44 @@ class UserController extends Controller
 
     }
 
-     public function delete($id)
-    {
+     public function delete($id){
+    
      
         $user = User::find($id);
         if(Auth::user()->id ==$id){
             return back()->with('error','Admin Delete No Permission');
         }
         $user->delete();
-        Toastr::success('Success', 'User Deleted Successfully');
+        Toastr::success('User Deleted Successfully');
             return redirect()->back();
       
        
 
     }
+
+
+     public function active($id){
+
+        $user = User::find($id);
+        
+        $user->status = 1;
+        $user->save();
+        Toastr::success('User Activated Successfully');
+            return redirect()->back();
+    }
+
+    public function inactive($id){
+        $user = User::find($id);
+        if(Auth::user()->id ==$id){
+            Toastr::error('Admin Inactive No Permission');
+            return redirect()->back();
+        }
+        $user->status = 0;
+        $user->save();
+        Toastr::success('User Inactivated Successfully');
+            return redirect()->back();
+    }
+
+
+
 }

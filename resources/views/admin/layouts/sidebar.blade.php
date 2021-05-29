@@ -20,6 +20,9 @@
                      <li class="{{ request()->is('admin/user-list') ? 'active' : '' }}">
                         <a href="{{ route('user.list') }}"> <i class="menu-icon fa fa-users "></i>Users </a>
                     </li>
+                    <li class="{{ request()->is('admin/category-list') ? 'active' : '' }}">
+                        <a href="{{ route('category.list') }}"> <i class="menu-icon fa fa-users "></i>Category </a>
+                    </li>
                     {{--  <h3 class="menu-title">Setups</h3><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Components</a>
