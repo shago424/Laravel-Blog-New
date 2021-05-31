@@ -64,7 +64,7 @@
                             <div class="card-body">
                                 <table id="bootstrap-data-table-export" class="table table-hover  table-sm" >
                                     <thead>
-                                        <tr>
+                                        <tr style="background-color: #001f3f;color: white">
                                             <th>#</th>
                                             <th>Id</th>
                                             <th>Name</th>

@@ -37,6 +37,18 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'adm
     Route::get('category/delete/{id}',[App\Http\Controllers\admin\CategoryController::class,'delete'])->name('category.delete');
      Route::get('category/active/{id}',[App\Http\Controllers\admin\CategoryController::class,'active'])->name('category.active');
      Route::get('category/inactive/{id}',[App\Http\Controllers\admin\CategoryController::class,'inactive'])->name('category.inactive');
+
+
+     // Post section
+
+    Route::get('post-list',[App\Http\Controllers\admin\PostController::class,'index'])->name('post.list');
+    Route::get('post-create',[App\Http\Controllers\admin\PostController::class,'create'])->name('post.create');
+    Route::get('post-edit/{id}',[App\Http\Controllers\admin\PostController::class,'edit'])->name('post.edit');
+     Route::post('post/store',[App\Http\Controllers\admin\PostController::class,'store'])->name('post.store');
+    Route::post('post/update/{id}',[App\Http\Controllers\admin\PostController::class,'update'])->name('post.update');
+    Route::get('post/delete/{id}',[App\Http\Controllers\admin\PostController::class,'delete'])->name('post.delete');
+     Route::get('post/active/{id}',[App\Http\Controllers\admin\PostController::class,'active'])->name('post.active');
+     Route::get('post/inactive/{id}',[App\Http\Controllers\admin\PostController::class,'inactive'])->name('post.inactive');
     
 
 

@@ -15,4 +15,9 @@ class Category extends Model
         'description',
        
     ];
+
+     public function post(){
+        return $this->hasMany('App\Models\Post');
+
+    }
 }
