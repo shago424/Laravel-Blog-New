@@ -25,6 +25,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'admin'],function(){ 
     Route::get('dashboard',[App\Http\Controllers\admin\AdminDashboardController::class,'index'])->name('admin.dashboard');
+    Route::get('profile',[App\Http\Controllers\admin\AdminDashboardController::class,'profile'])->name('admin.profile');
   
 
 
@@ -63,6 +64,10 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'adm
     Route::get('delete/{id}',[App\Http\Controllers\admin\UserController::class,'delete'])->name('user.delete');
     Route::get('active/{id}',[App\Http\Controllers\admin\UserController::class,'active'])->name('user.active');
     Route::get('inactive/{id}',[App\Http\Controllers\admin\UserController::class,'inactive'])->name('user.inactive');
+
+    // Profile
+
+     
 
 
 });

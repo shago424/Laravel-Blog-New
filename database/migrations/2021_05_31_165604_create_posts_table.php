@@ -19,11 +19,10 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('title');
             $table->string('slug');
-            $table->text('body');
-            $table->string('tag')->nullable();
+            $table->Longtext('body');
             $table->integer('view_count')->default(0);
             $table->string('image')->defaullt('default.jpg');
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(1);
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });

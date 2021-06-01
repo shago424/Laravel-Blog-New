@@ -72,7 +72,7 @@
                                             <th>ID</th>
                                             <th>Post User</th>
                                             <th>Category</th>
-                                            <th>Title</th>
+                                            <th width="20px">Title</th>
                                             <th>Post Date</th>
                                             <th>Image</th>
                                             <th>Status</th>
@@ -92,9 +92,9 @@
                                            
                                             <td>
                                            @if($post->status == 1)
-                                            <span class="badge badge-success p-2">Active</span>
+                                            <span class="badge badge-success p-2">Published</span>
                                             @else
-                                             <span class="badge badge-danger p-2">Inactive</span>
+                                             <span class="badge badge-danger p-2">Draft</span>
                                              @endif
                                           </td>
                                             <td class="text-center">
@@ -107,11 +107,11 @@
                                                     <i class="fa fa-eye"></i>
                                             </button>
 
-                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editpost-{{ $post->id }}">
+                                          {{--   <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editpost-{{ $post->id }}">
                                                     <i class="fa fa-pencil"></i>
-                                            </button>
+                                            </button> --}}
 
-                                             <a href="{{ route('post.edit',$post->id) }}" class="btn btn-primary btn-sm" >
+                                             <a href="{{ route('post.edit',$post->id) }}" class="btn btn-success btn-sm" >
                                                     <i class="fa fa-pencil"></i>
                                             </a>
                                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletepost-{{ $post->id }}">
@@ -174,9 +174,9 @@
                                             </div>
 
                                                 <div class="row form-group ">
-                                                <div class="col col-md-3"><label for="tag" class=" form-control-label ">Tags (Separated)</label></div>
-                                                <div class="col-12 col-md-9"><input type="text" id="tag" name="tag" placeholder="Enter Tag (Separated)" class="form-control" class="@error('tag') is-invalid @enderror"><span class="help-block">{{-- <font style="color:red">{{($errors)->has('tag')?($errors->first('tag')):''}}</font> --}}</span></div>
-                                               {{--  @error('tag')
+                                                <div class="col col-md-3"><label for="tags" class=" form-control-label ">Tags (Separated)</label></div>
+                                                <div class="col-12 col-md-9"><input type="text" id="tags" name="tags" placeholder="Enter Tag (Separated)" class="form-control" class="@error('tag') is-invalid @enderror"><span class="help-block">{{-- <font style="color:red">{{($errors)->has('tags')?($errors->first('tags')):''}}</font> --}}</span></div>
+                                               {{--  @error('tags')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror --}}
                                             </div>
@@ -271,9 +271,9 @@
                                             </div>
 
                                                <div class="row form-group ">
-                                                <div class="col col-md-3"><label for="tag" class=" form-control-label ">Tags (Separated)</label></div>
-                                                <div class="col-12 col-md-9"><input type="text" id="tag" name="tag" value="{{ $post->tag }}" placeholder="Enter Tag (Separated)" class="form-control" class="@error('tag') is-invalid @enderror"><span class="help-block">{{-- <font style="color:red">{{($errors)->has('tag')?($errors->first('tag')):''}}</font> --}}</span></div>
-                                               {{--  @error('tag')
+                                                <div class="col col-md-3"><label for="tags" class=" form-control-label ">Tags (Separated)</label></div>
+                                                <div class="col-12 col-md-9"><input type="text" id="tags" name="tags" value="{{ $post->tag }}" placeholder="Enter Tag (Separated)" class="form-control" class="@error('tag') is-invalid @enderror"><span class="help-block">{{-- <font style="color:red">{{($errors)->has('tags')?($errors->first('tags')):''}}</font> --}}</span></div>
+                                               {{--  @error('tags')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror --}}
                                             </div>

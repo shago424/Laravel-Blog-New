@@ -10,6 +10,7 @@ use Auth;
 use Toastr;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Str;
 use Storage;
 Use Image;
@@ -69,10 +70,19 @@ class PostController extends Controller
         $post->category_id = $request->category_id; 
         $post->slug = $slug;
         $post->body = $request->body;
-        $post->tag = $request->tag;
+        $post->tags = $request->tags;
         $post->user_id = Auth::user()->id;
         $post->image = $imageName;
         $post->save();
+
+        $tags = [];
+        $stringtags = explode(',', $request->tags);
+        foreach ($stringtags as $tag){
+            array_push($tags,['name' => $tag]);
+        }
+
+        $post->tags()->createMany($tags);
+
 
         if($post){
              Toastr::success('Post Added Successfully');
@@ -145,7 +155,7 @@ class PostController extends Controller
         Storage::disk('public')->put('post/' . $imageName, $img);
     }else{
 
-        $request->image = $post->image;
+        $imageName = $post->image;
 
     }
        
@@ -153,10 +163,19 @@ class PostController extends Controller
         $post->category_id = $request->category_id; 
         $post->slug = $slug;
         $post->body = $request->body;
-        $post->tag = $request->tag;
+        
         $post->updated_by = Auth::user()->id;
         $post->image = $imageName;
         $post->save();
+
+        $post->tags()->delete();
+        $tags = [];
+        $stringtags = explode(',', $request->tags);
+        foreach ($stringtags as $tag){
+            array_push($tags,['name' => $tag]);
+        }
+
+        $post->tags()->createMany($tags);
         
        
 

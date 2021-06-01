@@ -94,9 +94,9 @@
                                             </div>
 
                                              <div class="row form-group ">
-                                                <div class="col col-md-3"><label for="tag" class=" form-control-label ">Tags (Separated)</label></div>
-                                                <div class="col-12 col-md-9"><input type="text" id="tag" name="tag" placeholder="Enter Tag (Separated)" class="form-control" class="@error('tag') is-invalid @enderror"><span class="help-block">{{-- <font style="color:red">{{($errors)->has('tag')?($errors->first('tag')):''}}</font> --}}</span></div>
-                                               {{--  @error('tag')
+                                                <div class="col col-md-3"><label for="tags" class=" form-control-label ">Tags (Separated)</label></div>
+                                                <div class="col-12 col-md-9"><input type="text" id="tags" name="tags" placeholder="Enter Tag (Separated)" class="form-control" class="@error('tag') is-invalid @enderror"><span class="help-block">{{-- <font style="color:red">{{($errors)->has('tags')?($errors->first('tags')):''}}</font> --}}</span></div>
+                                               {{--  @error('tags')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror --}}
                                             </div>

@@ -36,7 +36,7 @@
     </div>
 @endif
 
-         {{-- @if(Session::get('success'))
+      {{--    @if(Session::get('success'))
                <div class="alert alert-success alert-dismissible">
               <button type="button" class="close" data-dismiss="alert">&times;</button>
               <strong>{{session::get('success')}}</strong> </div> 
