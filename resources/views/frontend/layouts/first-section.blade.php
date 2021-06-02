@@ -11,7 +11,7 @@
                                         <span class="bg-aqua"><a href="{{ route('all-category',$first->category->slug) }}" title="">{{ $first->category->name }}</a></span>
                                         <h4><a href="{{ route('single_post',$first->slug) }}" title="">{{$first->title}}</a></h4>
                                         <small><a href="garden-single.html" title="">{{ date('d-M-Y',strtotime($first->created_at)) }}</a></small>
-                                        <small><a href="#" title="">{{ $first->user->name }}</a></small>
+                                        <small><a href="#" title="">by {{ $first->user->name }}</a></small>
                                     </div><!-- end meta -->
                                 </div><!-- end shadow-desc -->
                             </div><!-- end shadow -->
