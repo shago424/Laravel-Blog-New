@@ -13,9 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [App\Http\Controllers\Frontend\FrontendController::class, 'index'])->name('public');
+
+Route::get('/blog-post/{slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'single_post'])->name('single_post');
+
+Route::get('/all-categories/{slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'allcategory'])->name('all-category');
+
+Route::get('/all-tag-post/{name}', [App\Http\Controllers\Frontend\FrontendController::class, 'alltag'])->name('all-tag');
+
 
 Auth::routes();
 
@@ -26,6 +35,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'admin'],function(){ 
     Route::get('dashboard',[App\Http\Controllers\admin\AdminDashboardController::class,'index'])->name('admin.dashboard');
     Route::get('profile',[App\Http\Controllers\admin\AdminDashboardController::class,'profile'])->name('admin.profile');
+    Route::post('update/profile',[App\Http\Controllers\admin\AdminDashboardController::class,'profileupdate'])->name('admin.profile.update');
+     Route::post('update/password',[App\Http\Controllers\admin\AdminDashboardController::class,'passwordupdate'])->name('admin.password.update');
   
 
 

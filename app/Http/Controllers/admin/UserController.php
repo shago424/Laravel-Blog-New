@@ -45,10 +45,7 @@ class UserController extends Controller
 
         Toastr::success('User Updated Successfully');
             return redirect()->back();
-
-     
-       
-
+  
     }
 
      public function delete($id){

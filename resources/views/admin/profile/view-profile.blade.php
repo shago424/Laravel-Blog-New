@@ -28,8 +28,8 @@
 
 
 <div class="row justify-content-center">
-<div class="col-md-8 "style="padding-left: 5px;">
-       @if ($errors->any())
+<div class="col-md-12 ">
+           @if ($errors->any())
     <div class="alert alert-danger" >
         <ul>
             @foreach ($errors->all() as $error)
@@ -47,6 +47,9 @@
            {{--  <div class="animated fadeIn"> --}}
                 <div class="row">
 
+  
+    
+
                     <div class="col-md-4">
                        <div class="card" style="border-bottom:solid 3px red ;">
                         <div class="card-header bg-danger text-white">
@@ -54,7 +57,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="mx-auto d-block">
-                                    <img class="rounded-circle mx-auto d-block" src="{{asset('backend')}}/images/admin.jpg" alt="Card image cap">
+                                    <img class="rounded-circle mx-auto d-block" src="{{(!empty(Auth::user()->image))?url('upload/userimage/'.Auth::user()->image):url('upload/usernoimage.jpg')}}" alt="Card image cap">
                                     <h5 class="text-sm-center mt-2 mb-1">{{ $user->name }}</h5>
                                     <div class="location text-sm-center"><i class="fa fa-map-marker"></i> {{$user->address}}</div>
                                 </div>
@@ -72,120 +75,174 @@
                         </div>
                     </div>
 
-                    <div class="col-md-8">
-                      <div class="card" style="border-bottom:solid 3px ;">
-                            <div class="card-header bg-danger text-white">
-                                <h4>Details Information</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="default-tab">
-                                    <nav>
-                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">User Details</a>
-                                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">Update Profile</a>
-                                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="true">Change Password</a>
-                                        </div>
-                                    </nav>
-                                    <div class="tab-content pl-3 pt-2" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                                            <strong><i class="fa fa-book mr-1"></i> Name</strong>
+<div class="col-md-8">
+  <div class="card" style="border-bottom:solid 3px red;">
+        <div class="card-header bg-danger text-white">
+            <h4>Admin Details</h4>
+        </div>
+        <div class="card-body">
+            <div class="default-tab">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active show" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Profile Details</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Update Profile</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Change Pssword</a>
+        </div>
+    </nav>
+    <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+        <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+           
+           </p><strong><i class="fa fa-book mr-1"></i> Name</strong>
 
-                                            <p class="text-muted">
-                                              {{ $user->name }}
-                                            </p>
+            <p class="text-muted">
+              {{ $user->name }}
+            </p>
 
-                                             <hr style="border:solid 1px red;">
-                                            <strong><i class="fa fa-envelope mr-1"></i> Email</strong>
+             <hr style="border:solid 1px red;">
+            <strong><i class="fa fa-envelope mr-1"></i> Email</strong>
 
-                                            <p class="text-muted">
-                                              {{ $user->email }}
-                                            </p>
-                                             <hr style="border:solid 1px red;">
-                                              <strong><i class="fa fa-mobile mr-1"></i> Mobile</strong>
+            <p class="text-muted">
+              {{ $user->email }}
+            </p>
+             <hr style="border:solid 1px red;">
+              <strong><i class="fa fa-mobile mr-1"></i> Mobile</strong>
 
-                                            <p class="text-muted">
-                                              {{ $user->mobile }}
-                                            </p>
+            <p class="text-muted">
+              {{ $user->mobile }}
+            </p>
 
 
-                                           
+           
 
-                                            
-                                             <hr style="border:solid 1px red;">
-                                            <strong><i class="fa fa-pencil mr-1"></i> Ocaption</strong>
+            
+             <hr style="border:solid 1px red;">
+            <strong><i class="fa fa-pencil mr-1"></i> Ocaption</strong>
 
-                                            <p class="text-muted">
-                                              <span class="tag tag-danger">{{ $user->ocap }}</span>
-                                             
-                                            </p>
-                                             <hr style="border:solid 1px red;">
-                                            <strong><i class="fa fa-map-marker mr-1"></i> Location</strong>
+            <p class="text-muted">
+              <span class="tag tag-danger">{{ $user->ocap }}</span>
+             
+            </p>
+             <hr style="border:solid 1px red;">
+            <strong><i class="fa fa-map-marker mr-1"></i> Location</strong>
 
-                                            <p class="text-muted">{{$user->address}}</p>
+            <p class="text-muted">{{$user->address}}</p>
 
-                                            
-                                             <hr style="border:solid 1px red;">
+            
+             <hr style="border:solid 1px red;">
 
-                                            <strong><i class="fa fa-file mr-1"></i> About</strong>
+            <strong><i class="fa fa-file mr-1"></i> About</strong>
 
-                                            <p class="text-muted">{!! $user->about !!}</p>
-                                            {{-- <hr style="border:solid 1px red;"> --}}
-                                            <a href="{{ $user->follow }}" class="btn btn-primary btn-block"><b>Follow</b></a>
-                                        </div>
-                                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                            <form action="{{ route('category.store') }}" method="post" class="form-horizontal" id="addCategory" enctype="multipart/form-data">
-                                            @csrf
-                                            {{-- @method('put') --}}
-                                              <div class="row form-group">
-                                                <div class="col col-md-3"><label for="email" class=" form-control-label">Name</label></div>
-                                                <div class="col-12 col-md-9"><input type="text" id="name" name="email" placeholder="Enter email" disabled="" class="form-control" value="{{ $user->email }}" class="@error('email') is-invalid @enderror"><span class="help-block"><font style="color:red">{{($errors)->has('email')?($errors->first('email')):''}}</font></span></div>
-                                                @error('email')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="name" class=" form-control-label">Name</label></div>
-                                                <div class="col-12 col-md-9"><input type="text" id="name" name="name" placeholder="Enter Name" class="form-control" class="@error('name') is-invalid @enderror"><span class="help-block"><font style="color:red">{{($errors)->has('name')?($errors->first('name')):''}}</font></span></div>
-                                                @error('title')
-                                                    <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                          
-                                            <div class="row form-group">
-                                                <div class="col col-md-3"><label for="description" class=" form-control-label">Description</label></div>
-                                                <div class="col-12 col-md-9"><textarea type="text" id="description" name="description" placeholder="Enter Description" class="form-control" rows="3"></textarea><span class="help-block"><font style="color:red">{{($errors)->has('description')?($errors->first('description')):''}}</font></span></div>
-                                            </div>
-                                             <div class="row form-group">
-                                                <div class="col col-md-3"><label for="image" class=" form-control-label">Image</label></div>
-                                                <div class="col-12 col-md-9">
-                                                    <img src="{{-- {{(empty($category->image))?:url('upload/usernoimage.jpg')}} --}}" alt="{{-- {{ $category->image }} --}}" width="50px" height="50px" />
-                                                  <input type="file" id="image" name="image"  class="form-control" ><span class="help-block">
-                                                    <span class="help-block"><font style="color:red">{{($errors)->has('image')?($errors->first('image')):''}}</font></span></div>
-                                            </div>
-                                           
-                                        
-                                    </div>
-                                   
-                                
-                            </div>
-                            <div class="modal-footer" style="background:#605ca8;color: #fff">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-warning" onclick="event.preventDefault();
-                                     document.getElementById('addCategory').submit();">Add Category</button>
-                            </div>
-                            </form>
-                                        </div>
-                                        {{-- <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <p class="text-muted">{!! $user->about !!}</p>
+            {{-- <hr style="border:solid 1px red;"> --}}
+            <a href="{{ $user->follow }}" class="btn btn-primary btn-block"><b>Follow</b></a>
 
-                                            helo
-                                           
-                                        </div> --}}
-                                    </div>
 
-                                </div>
-                            </div>
-                        </div>
+    </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                         
+        <div class="card-body card-block">
+            <form action="{{ route('admin.profile.update') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                @csrf
+                  <div class="row form-group">
+                    <div class="col col-md-3"><label for="email" class=" form-control-label">Email</label></div>
+                    <div class="col-12 col-md-9"><input type="email" id="email" name="email" placeholder="Enter Email" class="form-control" disabled="" value="{{ $user->email }}">
                     </div>
+                </div>
+               
+               <div class="row form-group">
+                    <div class="col col-md-3"><label for="user_id" class=" form-control-label"> User ID</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="user_id" name="user_id" placeholder="Enter User ID" class="form-control" value="{{ $user->user_id }}">
+                    </div>
+                </div>
+                 <div class="row form-group">
+                    <div class="col col-md-3"><label for="name" class=" form-control-label"> Name</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="name" name="name" placeholder="Enter Name" class="form-control" value="{{ $user->name }}">
+                    </div>
+                </div>
+                 <div class="row form-group">
+                    <div class="col col-md-3"><label for="ocaption" class=" form-control-label"> Ocaption</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="ocap" name="ocap" placeholder="Enter Ocaption" class="form-control" value="{{ $user->ocap }}">
+                    </div>
+                </div>
+                 <div class="row form-group">
+                    <div class="col col-md-3"><label for="mobile" class=" form-control-label"> Mobile</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="mobile" name="mobile" placeholder="Enter Mobile" class="form-control" value="{{ $user->mobile }}">
+                    </div>
+                </div>
+               <div class="row form-group">
+                    <div class="col col-md-3"><label for="address" class=" form-control-label"> Address</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="address" name="address" placeholder="Enter Address" class="form-control" value="{{ $user->address }}">
+                    </div>
+                </div>
+
+                 <div class="row form-group">
+                    <div class="col col-md-3"><label for="address" class=" form-control-label"> Image</label></div>
+                    <div class="col-12 col-md-9">
+                    <img src="{{(!empty($user->image))?url('upload/userimage/'.$user->image):url('upload/usernoimage.jpg')}}" alt="{{ $user->image }}" width="50px" height="50px" />
+
+                        <input type="file" id="image" name="image"  class="form-control">
+                    </div>
+                </div>
+               
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="about" class=" form-control-label">About</label></div>
+                    <div class="col-12 col-md-9"><textarea name="about" id="summernote" id="about" rows="9" placeholder="Enter About" class="form-control">{{$user->about }}</textarea></div>
+                </div>
+                 
+
+            <button type="submit" class="btn btn-primary btn float-right">
+        <i class="fa fa-dot-circle-o"></i> Submit
+            </button>
+
+            <button type="reset" class="btn btn-danger btn float-right" style="margin-right: 5px">
+                <i class="fa fa-ban"></i> Reset
+            </button>
+            </form>
+        </div>
+     
+                                                
+
+            </div>
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    <div class="card-body card-block">
+            <form action="{{ route('admin.password.update') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                @csrf
+                  <div class="row form-group">
+                    <div class="col col-md-3"><label for="old_password" class=" form-control-label">Old Password</label></div>
+                    <div class="col-12 col-md-9"><input type="password" id="old_password" name="old_password" placeholder="Enter Old Password" class="form-control" >
+                    </div>
+                </div>
+               
+             <div class="row form-group">
+                    <div class="col col-md-3"><label for="password" class=" form-control-label">New Password</label></div>
+                    <div class="col-12 col-md-9"><input type="password" id="password" name="password" placeholder="Enter New Password" class="form-control" >
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col col-md-3"><label for="password_confirm" class=" form-control-label">Confirm Password</label></div>
+                    <div class="col-12 col-md-9"><input type="password" id="password_confirm" name="password_confirmation" placeholder="Enter Confirm Password" class="form-control" >
+                    </div>
+                </div>
+                 
+                <button type="reset" class="btn btn-danger btn " >
+                <i class="fa fa-ban"></i> Reset
+            </button>
+            <button type="submit" class="btn btn-primary btn ">
+        <i class="fa fa-dot-circle-o"></i> Submit
+            </button>
+
+            
+            </form>
+        </div>
+
+                   </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
 
                 </div>
             {{-- </div>.animated --}}
