@@ -10,8 +10,11 @@
                                     <div class="blog-meta">
                                         <span class="bg-aqua"><a href="{{ route('all-category',$first->category->slug) }}" title="">{{ $first->category->name }}</a></span>
                                         <h4><a href="{{ route('single_post',$first->slug) }}" title="">{{$first->title}}</a></h4>
-                                        <small><a href="garden-single.html" title="">{{ date('d-M-Y',strtotime($first->created_at)) }}</a></small>
+                                        <small><a href="garden-single.html" title="">{{$first->created_at->diffForHumans() }}</a></small>
                                         <small><a href="#" title="">by {{ $first->user->name }}</a></small>
+                                        <small><a href="#" title=""><i class="fa fa-eye"></i> 23</a></small>
+                                        <small><a href="#" title=""><i class="fa fa-heart"></i> 23</a></small>
+                                      <small><a href="#" title=""><i class="fa fa-comment-o"></i> 23</a></small>
                                     </div><!-- end meta -->
                                 </div><!-- end shadow-desc -->
                             </div><!-- end shadow -->

@@ -10,7 +10,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-12 hidden-xs-down hidden-sm-down">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item" style="font-size:20px"><a style="color:#fff" href="#">Home</a></li>
-                            <li class="breadcrumb-item" style="font-size:20px"><a style="color:#fff" href="#">Tag</a></li>
+                            <li class="breadcrumb-item" style="font-size:20px"><a style="color:#fff" href="#">Tag Post</a></li>
                             <li style="font-size:20px;color:black" class="breadcrumb-item active">{{-- {{ $tagIdByPost['tags']['name'] }} --}}</li>
                         </ol>
                     </div><!-- end col -->                    
@@ -27,7 +27,7 @@
               @if($tagIdByPosts->isEmpty())
             <div class="error_page" >
             <h3 style="color: red">We Are Sorry</h3>
-            <h1 style="color: red"> Not Found !</h1>
+            <h1 style="color: red">Tag Post Not Found !</h1>
             <p >Unfortunately, the page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exists</p>
             <span></span> <a class="btn btn-danger" href="{{ route('public') }}" class="wow fadeInLeftBig">Go to home page</a> </div>
             @else
@@ -43,12 +43,16 @@
                                     </div><!-- end col -->
 
                                     <div class="blog-meta big-meta col-md-8">
-                                        <span class="bg-aqua"><a href="{{ route('single_post',$post->category->slug) }}" title="">{{ $post->category->name }}</a></span>
+                                        <span class="bg-aqua"><a href="{{ route('all-category',$post->category->slug) }}" title="">{{ $post->category->name }}</a></span>
                                         <h4><a href="{{ route('single_post',$post->slug) }}" title="">{{ $post->title }}</a></h4>
                                         <p>{!! $post->body !!}</p>
+                                        <small><a href="garden-single.html" title="">{{$post->created_at->diffForHumans() }}</a></small>
+                                        <small><a href="#" title=""> by {{ $post->user->name }}</a></small>
                                         <small><a href="garden-category.html" title=""><i class="fa fa-eye"></i> 1887</a></small>
-                                        <small><a href="garden-single.html" title="">{{ date('d-M-Y',strtotime($post->created_at)) }}</a></small>
-                                        <small><a href="#" title=""> by{{ $post->user->name }}</a></small>
+                                         <small><a href="#" title=""><i class="fa fa-heart"></i> 23</a></small>
+                                      <small><a href="#" title=""><i class="fa fa-comment-o"></i> 23</a></small>
+                                        
+                                        
                                     </div><!-- end meta -->
                                 </div><!-- end blog-box -->
                                 @endforeach

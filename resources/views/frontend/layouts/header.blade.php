@@ -19,11 +19,11 @@
                     <div class="collapse navbar-collapse justify-content-md-center" id="Forest Timemenu">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" href="{{ route('public') }}">Home</a>
+                                <a class="nav-link color-red-hover" href="{{ route('public') }}">Home</a>
                             </li>
                            @foreach($header_categories as $category)
                             <li class="nav-item">
-                                <a class="nav-link color-green-hover" href="{{ route('all-category',$category->slug) }}">{{ $category->name }}</a>
+                                <a style="font-size:16px" class="nav-link color-red-hover" href="{{ route('all-category',$category->slug) }}">{{ $category->name }}</a>
                             </li>
                             @endforeach
                             <li class="nav-item">

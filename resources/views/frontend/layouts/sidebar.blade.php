@@ -19,7 +19,7 @@
                                             <div class="w-100 justify-content-between">
                                                 <img src="{{(!empty($popular->image))?url('storage/post/'.$popular->image):url('upload/usernoimage.jpg')}}" alt="{{ $popular->title }}" alt="" class="img-fluid float-left">
                                                 <h5 class="mb-1">{{$popular->title}}</h5>
-                                                <small>{{ date('d-M-Y',strtotime($popular->created_at)) }}</small>
+                                                <small>{{$popular->created_at->diffForHumans() }}</small>
                                             </div>
                                         </a>
                                         @endforeach
@@ -70,7 +70,7 @@
                                             <div class="w-100 justify-content-between">
                                                 <img src="{{(!empty($recent->image))?url('storage/post/'.$recent->image):url('upload/usernoimage.jpg')}}" alt="{{ $recent->title }}" alt="" class="img-fluid float-left">
                                                 <h5 class="mb-1">{{$recent->title}}</h5>
-                                                <small>{{ date('d-M-Y',strtotime($recent->created_at)) }}</small>
+                                                <small>{{$recent->created_at->diffForHumans() }}</small>
                                             </div>
                                         </a>
                                         @endforeach

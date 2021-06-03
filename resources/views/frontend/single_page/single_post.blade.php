@@ -5,12 +5,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                        <h2 style="color:white"><i class="fa fa-leaf bg-green"></i> Blog</h2>
+                        <h2 style="color:white"><i class="fa fa-leaf bg-green"></i> Post Details</h2>
                     </div><!-- end col -->
                     <div class="col-lg-4 col-md-4 col-sm-12 hidden-xs-down hidden-sm-down">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item" style="font-size:20px"><a style="color:#fff" href="{{ route('public') }}">Home</a></li>
-                            <li style="font-size:20px;color:black" class="breadcrumb-item active">{{ $post->title }}</li>
+                            <li style="font-size:20px;color:#fff" class="breadcrumb-item active">Category : {{ $post->category->name }}</li>
                         </ol>
                     </div><!-- end col -->                    
                 </div><!-- end row -->
@@ -23,14 +23,16 @@
                     <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                         <div class="page-wrapper">
                             <div class="blog-title-area">
-                                <span class="color-green"><a href="{{ route('single_post',$post->category->slug) }}" title="">{{ $post->category->name }}</a></span>
+                                <span class="color-green"><a href="{{ route('all-category',$post->category->slug) }}" title="">{{ $post->category->name }}</a></span>
 
                                 <h3>{{ $post->title }}</h3>
 
                                 <div class="blog-meta big-meta">
-                                    <small><a href="garden-single.html" title="">{{ date('d-M-Y',strtotime($post->created_at)) }}</a></small>
+                                    <small><a href="garden-single.html" title="">{{$post->created_at->diffForHumans() }}</a></small>
                                     <small><a href="blog-author.html" title="">by {{ $post->user->name }}</a></small>
                                     <small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
+                                     <small><a href="#" title=""><i class="fa fa-heart"></i> 2344</a></small>
+                                      <small><a href="#" title=""><i class="fa fa-comment-o"></i> 2344</a></small>
                                 </div><!-- end meta -->
 
                                 <div class="post-sharing">

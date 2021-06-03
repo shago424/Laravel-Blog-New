@@ -42,7 +42,7 @@ class PostController extends Controller
              'image' => 'required|sometimes|image|mimes:png,jpg,jpeg,bmp',
             // 'slug' => 'required',
             'body' => 'required',
-            'tag' => 'required',
+            // 'tag' => 'required',
             
         ]);
 
@@ -70,7 +70,7 @@ class PostController extends Controller
         $post->category_id = $request->category_id; 
         $post->slug = $slug;
         $post->body = $request->body;
-        $post->tags = $request->tags;
+        
         $post->user_id = Auth::user()->id;
         $post->image = $imageName;
         $post->save();
@@ -86,7 +86,7 @@ class PostController extends Controller
 
         if($post){
              Toastr::success('Post Added Successfully');
-            return redirect()->back(); 
+            return redirect()->route('post.list'); 
         }else{
                  Toastr::error('Post Added Not Successfully');
             return redirect()->route("post.list"); 
@@ -181,7 +181,7 @@ class PostController extends Controller
 
         if($post){
              Toastr::success('Post Updated Successfully');
-            return redirect()->back(); 
+            return redirect()->route('post.list');
         }else{
                  Toastr::error('Post Updated Not Successfully');
             return redirect()->back(); 

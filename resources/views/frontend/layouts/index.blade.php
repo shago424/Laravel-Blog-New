@@ -45,7 +45,7 @@
     <![endif]-->
 
 </head>
-<body>
+<body> 
 
     <div id="wrapper">
         <div class="collapse top-search" id="collapseExample">

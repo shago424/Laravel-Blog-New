@@ -21,7 +21,7 @@
                                     <div class="col-md-4">
                                         <div class="post-media">
                                             <a href="{{ route('single_post',$post->slug) }}" title="">
-                                                <img src="{{(!empty($post->image))?url('storage/post/'.$post->image):url('upload/usernoimage.jpg')}}" alt="{{ $post->title }}" class="img-fluid">
+                                                <img src="{{(!empty($post->image))?url('storage/post/'.$post->image):url('upload/usernoimage.jpg')}}" alt="{{ $post->title }}" class="img-fluid" style="width:250px;height: 200px">
                                                 <div class="hovereffect"></div>
                                             </a>
                                         </div><!-- end media -->
@@ -30,9 +30,9 @@
                                     <div class="blog-meta big-meta col-md-8">
                                         <span class="bg-aqua"><a href="{{ route('all-category',$post->category->slug) }}" title="">{{ $post->category->name }}</a></span>
                                         <h4><a href="{{ route('single_post',$post->slug) }}" title="">{{ $post->title }}</a></h4>
-                                        <p>{!! $post->body !!}</p>
+                                        <p>{!! Str::limit($post->body, 110 )!!}</p>
                                         <small><a href="garden-category.html" title=""><i class="fa fa-eye"></i> 1887</a></small>
-                                        <small><a href="garden-single.html" title="">{{ date('d-M-Y',strtotime($post->created_at)) }}</a></small>
+                                        <small><a href="garden-single.html" title="">{{$post->created_at->diffForHumans() }}</a></small>
                                         <small><a href="#" title=""> by{{ $post->user->name }}</a></small>
                                     </div><!-- end meta -->
                                 </div><!-- end blog-box -->
@@ -69,7 +69,7 @@
                                             <div class="w-100 justify-content-between">
                                                 <img src="{{(!empty($hot->image))?url('storage/post/'.$hot->image):url('upload/usernoimage.jpg')}}" alt="{{ $hot->title }}" alt="" class="img-fluid float-left">
                                                 <h5 class="mb-1">{{$hot->title}}</h5>
-                                                <small>{{ date('d-M-Y',strtotime($hot->created_at)) }}</small>
+                                                <small>{{$hot->created_at->diffForHumans() }}</small>
                                             </div>
                                         </a>
                                         @endforeach
@@ -90,7 +90,7 @@
                                             <div class="w-100 justify-content-between">
                                                 <img src="{{(!empty($important->image))?url('storage/post/'.$important->image):url('upload/usernoimage.jpg')}}" alt="{{ $important->title }}" alt="" class="img-fluid float-left">
                                                 <h5 class="mb-1">{{$important->title}}</h5>
-                                                <small>{{ date('d-M-Y',strtotime($important->created_at)) }}</small>
+                                                <small>{{$important->created_at->diffForHumans() }}</small>
                                             </div>
                                         </a>
                                         @endforeach

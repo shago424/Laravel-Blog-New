@@ -18,7 +18,26 @@
 
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="topsearch text-right">
-                            <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-search"></i> Search</a>
+                            {{-- <a style="margin-right:5px" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-search"></i> Search</a> --}}
+                    @if (Route::has('login'))
+                
+                    @auth
+                    @if(Auth::user()->role_id ==1)
+                        <a href="{{ route('admin.dashboard') }}" class="text-sm text-gray-700 underline"><i class="fa fa-user" title=" Dashboard"> {{ Auth::user()->name }}</i></a>
+                    @elseif(Auth::user()->role_id ==2)
+                   <a href="{{ route('user.dashboard') }}" class="text-sm text-gray-700 underline"><i class="fa fa-user" title=" Dashboard"> {{ Auth::user()->name }}</i></a>
+                    @endif
+                   
+                       
+                    @else
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
                         </div><!-- end search -->
                     </div><!-- end col -->
                 </div><!-- end row -->
