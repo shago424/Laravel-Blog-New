@@ -24,6 +24,7 @@ Route::get('/blog-post/{slug}', [App\Http\Controllers\Frontend\FrontendControlle
 Route::get('/all-categories/{slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'allcategory'])->name('all-category');
 
 Route::get('/all-tag-post/{name}', [App\Http\Controllers\Frontend\FrontendController::class, 'alltag'])->name('all-tag');
+Route::get('/search', [App\Http\Controllers\Frontend\FrontendController::class, 'search'])->name('search');
 
 
 Auth::routes();

@@ -28,7 +28,7 @@
                                 <h3>{{ $post->title }}</h3>
 
                                 <div class="blog-meta big-meta">
-                                    <small><a href="garden-single.html" title="">{{$post->created_at->diffForHumans() }}</a></small>
+                                    <small><a href="garden-single.html" title="">{{date('d-M-y h:A',strtotime($post->created_at))}}</a></small>
                                     <small><a href="blog-author.html" title="">by {{ $post->user->name }}</a></small>
                                     <small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
                                      <small><a href="#" title=""><i class="fa fa-heart"></i> 2344</a></small>

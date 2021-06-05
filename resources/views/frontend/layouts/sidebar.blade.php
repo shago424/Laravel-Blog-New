@@ -2,10 +2,12 @@
                         <div class="sidebar">
                             <div class="widget">
                                 <h2 class="widget-title">Search</h2>
-                                <form class="form-inline search-form">
+                                <form action="{{ route('search') }}" method="GET" class="form-inline search-form">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Search on the site">
+                                        <input type="text" name="search" class="form-control" placeholder="Search on the site">
+
                                     </div>
+                                    <font style="color:red">{{($errors)->has('search')?($errors->first('search')):''}}</font>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                                 </form>
                             </div><!-- end widget -->

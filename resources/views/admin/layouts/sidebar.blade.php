@@ -7,10 +7,14 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="{{ route('admin.dashboard') }}"><img src="{{ asset('backend') }}/images/logo.png" alt="Logo"></a>
-                <a class="navbar-brand hidden" href="{{ route('admin.dashboard') }}"><img src="{{ asset('backend') }}/images/logo2.png" alt="Logo"></a>
-            </div>
+                <a class="navbar-brand float-left" href="{{ route('admin.dashboard') }}"><img src="{{(!empty(Auth::user()->image))?url('upload/userimage/'.Auth::user()->image):url('upload/usernoimage.jpg')}}" width="50px" height="50px" alt="Logo" style="border-radius: 50%;margin-right:10px"></a>
+                <a class="navbar-brand float-left" href="{{ route('admin.dashboard') }}"><img src="{{ asset('backend') }}/images/logo.png" alt="Logo"></a>
+                
+            </div> 
+            <br>
+            <br>
 
+            <br>
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">

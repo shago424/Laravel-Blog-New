@@ -1,7 +1,7 @@
 <div class="topbar-section">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-6 hidden-xs-down">
+                    <div class="col-lg-5 col-md-6 col-sm-6 hidden-xs-down">
                         <div class="topsocial">
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i class="fa fa-youtube"></i></a>
@@ -13,31 +13,50 @@
                         </div><!-- end social -->
                     </div><!-- end col -->
 
-                    <div class="col-lg-4 hidden-md-down">
+                    <div class="col-lg-5 hidden-md-down">
                     </div><!-- end col -->
 
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-2 col-md-6 col-sm-6 col-xs-12">
                         <div class="topsearch text-right">
-                            {{-- <a style="margin-right:5px" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-search"></i> Search</a> --}}
+                           
                     @if (Route::has('login'))
-                
                     @auth
-                    @if(Auth::user()->role_id ==1)
-                        <a href="{{ route('admin.dashboard') }}" class="text-sm text-gray-700 underline"><i class="fa fa-user" title=" Dashboard"> {{ Auth::user()->name }}</i></a>
-                    @elseif(Auth::user()->role_id ==2)
-                   <a href="{{ route('user.dashboard') }}" class="text-sm text-gray-700 underline"><i class="fa fa-user" title=" Dashboard"> {{ Auth::user()->name }}</i></a>
-                    @endif
-                   
-                       
+                     <div class="user-area dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="user-avatar rounded-circle" src="{{(!empty(Auth::user()->image))?url('upload/userimage/'.Auth::user()->image):url('upload/usernoimage.jpg')}}" width="30px" height="30px" alt="User Avatar">
+                        </a>
+
+                        <div class="user-menu dropdown-menu">
+                            <a style="background-color: crimson;margin-top: -8px" class="nav-link" href="{{ route('admin.profile') }}"><i class="fa fa-user"></i> My Profile</a>
+
+                            {{-- <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a> --}}
+                            
+                             @if(Auth::user()->role_id ==1)
+                             <a style="background-color: crimson;margin-top: 1px" class="nav-link" href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
+                            <a style="background-color: crimson;margin-top: 1px" class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i>Logout</a>
+                                                              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                            @elseif(Auth::user()->role_id ==2)
+                            <a style="background-color: crimson;margin-top: 1px" class="dropdown-item" href="{{ route('user.dashboard') }}">Dashboard</a>
+                            <a style="background-color: crimson;margin-top: 1px" class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+                            @endif
+                        </div>
+                    </div>
+
+
+                    
                     @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
+                        <a  href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                            <a  href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
                         @endif
                     @endauth
                 </div>
             @endif
+            {{--  <a style="margin-right:5px" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-search"></i> Search</a> --}}
                         </div><!-- end search -->
                     </div><!-- end col -->
                 </div><!-- end row -->
