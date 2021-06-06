@@ -50,7 +50,7 @@
                                         <small><a href="#" title=""> by {{ $post->user->name }}</a></small>
                                         <small><a href="garden-category.html" title=""><i class="fa fa-eye"></i> 1887</a></small>
                                          <small><a href="#" title=""><i class="fa fa-heart"></i> 23</a></small>
-                                      <small><a href="#" title=""><i class="fa fa-comment-o"></i> 23</a></small>
+                                      <small><a href="{{route('single_post',$post->slug) }}" title=""><i class="fa fa-comment-o"></i> {{ $post->comments->count('id') }}</a></small>
                                         
                                         
                                     </div><!-- end meta -->

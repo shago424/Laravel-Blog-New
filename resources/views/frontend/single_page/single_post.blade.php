@@ -19,7 +19,18 @@
 
  <section class="section wb">
             <div class="container">
+                   @if(Session::get('success'))
+               <div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>{{session::get('success')}}</strong> </div> 
+            @endif
+              @if(Session::get('message'))
+               <div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>{{session::get('message')}}</strong> </div> 
+            @endif
                 <div class="row">
+                 
                     <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                         <div class="page-wrapper">
                             <div class="blog-title-area">
@@ -28,11 +39,11 @@
                                 <h3>{{ $post->title }}</h3>
 
                                 <div class="blog-meta big-meta">
-                                    <small><a href="garden-single.html" title="">{{date('d-M-y h:A',strtotime($post->created_at))}}</a></small>
-                                    <small><a href="blog-author.html" title="">by {{ $post->user->name }}</a></small>
-                                    <small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
-                                     <small><a href="#" title=""><i class="fa fa-heart"></i> 2344</a></small>
-                                      <small><a href="#" title=""><i class="fa fa-comment-o"></i> 2344</a></small>
+                                    <small><a style="color:crimson;font-size: 14px;font-weight:bolder;" href="garden-single.html" title="">{{date('d-M-y h:A',strtotime($post->created_at))}}</a></small>
+                                    <small><a style="color:crimson;font-size: 14px;font-weight:bolder;" href="blog-author.html" title=""><i class="fa fa-user" style="color:crimson;font-size: 14px;font-weight:bolder;"></i> by {{ $post->user->name }}</a></small>
+                                    <small><a style="color:crimson;font-size: 14px;font-weight:bolder;" href="#" title=""><i class="fa fa-eye" style="color:crimson;font-size: 16px;font-weight:bolder;"></i> 2344</a></small>
+                                     <small><a style="color:crimson;font-size: 14px;font-weight:bolder;" href="#" title=""><i class="fa fa-heart" style="color:crimson;font-size: 16px;font-weight:bolder;"></i> 2344</a></small>
+                                      <small><a style="color:crimson;font-size: 14px;font-weight:bolder;" href="{{route('single_post',$post->slug) }}" title=""><i class="fa fa-comment-o" style="color:crimson;font-size: 16px;font-weight:bolder;"></i> {{ $post->comments->count('id') }}</a></small>
                                 </div><!-- end meta -->
 
                                 <div class="post-sharing">
@@ -92,7 +103,7 @@
                             <hr class="invis1">
 
                             <div class="custombox authorbox clearfix">
-                                <h4 class="small-title">About author</h4>
+                                <h4 class="small-title">About Create Author</h4>
                                 <div class="row">
                                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                         <img src="{{(!empty($post->user->image))?url('upload/userimage/'.$post->user->image):url('upload/usernoimage.jpg')}}" alt="" class="img-fluid rounded-circle"> 
@@ -161,73 +172,137 @@
                             <hr class="invis1">
 
                             <div class="custombox clearfix">
-                                <h4 class="small-title">3 Comments</h4>
+                                <h4 class="small-title"> {{$post->comments->count('id')}} Comments</h4>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="comments-list">
+                                            @foreach($post->comments->where('status',1) as $comment)
                                             <div class="media">
                                                 <a class="media-left" href="#">
-                                                    <img src="{{ asset('frontend') }}/upload/author.jpg" alt="" class="rounded-circle">
+                                                    <img src="{{(!empty($comment->user->image))?url('upload/userimage/'.$comment->user->image):url('upload/usernoimage.jpg')}}" alt="{{ $comment->user->name }}" class="rounded-circle" width="50px" height="50px">
                                                 </a>
                                                 <div class="media-body">
-                                                    <h4 class="media-heading user_name">Amanda Martines <small>5 days ago</small></h4>
-                                                    <p>Exercitation photo booth stumptown tote bag Banksy, elit small batch freegan sed. Craft beer elit seitan exercitation, photo booth et 8-bit kale chips proident chillwave deep v laborum. Aliquip veniam delectus, Marfa eiusmod Pinterest in do umami readymade swag. Selfies iPhone Kickstarter, drinking vinegar jean.</p>
-                                                    <a href="#" class="btn btn-primary btn-sm">Reply</a>
-                                                </div>
-                                            </div>
+                                                    <h4 class="media-heading user_name">{{ $comment->user->name }} <small>{{ $comment->created_at->diffForHumans() }}</small></h4>
+                                                    <p>{!! $comment->comment !!}</p>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#comment-{{ $comment->id }}">
+                                                      Comment Reply
+                                                    </button>
+
+                                                    {{-- Reply Comment --}}
+
+                                                     <div class="row pt-3 message">
+                                                <div class="col-lg-12">
+                                                    <div class="comments-list">
+                                            @foreach($comment->replies as $reply)
                                             <div class="media">
                                                 <a class="media-left" href="#">
-                                                    <img src="{{ asset('frontend') }}/upload/author_01.jpg" alt="" class="rounded-circle">
+                                                    <img src="{{(!empty($reply->user->image))?url('upload/userimage/'.$reply->user->image):url('upload/usernoimage.jpg')}}" alt="{{ $reply->user->name }}" class="rounded-circle" width="50px" height="50px">
                                                 </a>
                                                 <div class="media-body">
+                                                    <h4 class="media-heading user_name">{{ $reply->user->name }} <small>{{ $reply->created_at->diffForHumans() }}</small></h4>
+                                                    <p>{!! $reply->message !!}</p>
+                                                    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#comment-{{ $comment->id }}">
+                                                      Comment Reply
+                                                    </button> --}}
 
-                                                    <h4 class="media-heading user_name">Baltej Singh <small>5 days ago</small></h4>
-
-                                                    <p>Drinking vinegar stumptown yr pop-up artisan sunt. Deep v cliche lomo biodiesel Neutra selfies. Shorts fixie consequat flexitarian four loko tempor duis single-origin coffee. Banksy, elit small.</p>
-
-                                                    <a href="#" class="btn btn-primary btn-sm">Reply</a>
+                                               
                                                 </div>
+                                                
                                             </div>
-                                            <div class="media last-child">
-                                                <a class="media-left" href="#">
-                                                    <img src="{{ asset('frontend') }}/upload/author_02.jpg" alt="" class="rounded-circle">
-                                                </a>
-                                                <div class="media-body">
+                                            @endforeach
+                                        </div>  
+                                    </div>
+                                </div>
 
-                                                    <h4 class="media-heading user_name">Marie Johnson <small>5 days ago</small></h4>
-                                                    <p>Kickstarter seitan retro. Drinking vinegar stumptown yr pop-up artisan sunt. Deep v cliche lomo biodiesel Neutra selfies. Shorts fixie consequat flexitarian four loko tempor duis single-origin coffee. Banksy, elit small.</p>
-
-                                                    <a href="#" class="btn btn-primary btn-sm">Reply</a>
+                                            {{-- End Reply Comment --}}
+                                               
                                                 </div>
+                                                
                                             </div>
+                                            @endforeach
                                         </div>
                                     </div><!-- end col -->
                                 </div><!-- end row -->
                             </div><!-- end custom-box -->
 
                             <hr class="invis1">
-
-                            <div class="custombox clearfix">
-                                <h4 class="small-title">Leave a Reply</h4>
+                            @guest
+                               <div class="custombox clearfix">
+                                <h4 class="small-title">Please Login To Comment</h4>
+                            </div>
+                            @else
+                               <div class="custombox clearfix">
+                                <h4 class="small-title">Write Comment</h4>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <form class="form-wrapper">
-                                            <input type="text" class="form-control" placeholder="Your name">
-                                            <input type="text" class="form-control" placeholder="Email address">
-                                            <input type="text" class="form-control" placeholder="Website">
-                                            <textarea class="form-control" placeholder="Your comment"></textarea>
+                                        <form method="POST" action="{{ route('comment.store',$post->id) }}" class="form-wrapper">
+                                            @csrf
+                                            <textarea name="comment" class="form-control" placeholder="Your comment"></textarea>
                                             <button type="submit" class="btn btn-primary">Submit Comment</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+                            @endguest
+                         
                         </div><!-- end page-wrapper -->
                     </div><!-- end col -->
 
                      @include('frontend.layouts.sidebar')
                 </div><!-- end row -->
             </div><!-- end container -->
+
+
+
+            <script type="text/javascript">
+  $(document).on('change','#com_id', function(){
+    var reply = $(this).val();
+    
+      $('.message').hide();
+    
+       
+    
+  });
+</script>
         </section>
+
+        <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+@foreach($post->comments as $comment)
+<div class="modal fade" id="comment-{{ $comment->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-info">
+        <h5 class="modal-title" id="exampleModalLabel">Comment Reply</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           
+                                
+    <div class="row">
+        <div class="col-lg-12">
+            <form method="POST" action="{{ route('comment.reply.store',$comment->id) }}" class="form-wrapper" id="Comment-{{ $comment->id }}">
+                @csrf
+                <textarea name="message" class="form-control" placeholder="Comment Reply"></textarea>
+            
+        </div>
+    </div>
+                            
+      </div>
+      <div class="modal-footer bg-info">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       <button type="submit" class="btn btn-warning" onclick="event.preventDefault();
+                                     document.getElementById('Comment-{{ $comment->id }}').submit();">Upadate Post</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+@endforeach
 
 
                             

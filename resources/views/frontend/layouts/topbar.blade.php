@@ -23,24 +23,28 @@
                     @auth
                      <div class="user-area dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="{{(!empty(Auth::user()->image))?url('upload/userimage/'.Auth::user()->image):url('upload/usernoimage.jpg')}}" width="30px" height="30px" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="{{(!empty(Auth::user()->image))?url('upload/userimage/'.Auth::user()->image):url('upload/usernoimage.jpg')}}" width="30px" height="30px" alt="{{ Auth::user()->name }}">
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a style="background-color: crimson;margin-top: -8px" class="nav-link" href="{{ route('admin.profile') }}"><i class="fa fa-user"></i> My Profile</a>
+                            <a style="background-color: crimson;margin-top: -8px" class="dropdown-item" href="{{ route('admin.profile') }}"><i class="fa fa-user"></i> My Profile</a>
 
                             {{-- <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a> --}}
                             
                              @if(Auth::user()->role_id ==1)
-                             <a style="background-color: crimson;margin-top: 1px" class="nav-link" href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
-                            <a style="background-color: crimson;margin-top: 1px" class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                             <a style="background-color: crimson;margin-top: 1px" class="dropdown-item" href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
+                            <a style="background-color: crimson;margin-top: 1px" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i>Logout</a>
                                                               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
                             @elseif(Auth::user()->role_id ==2)
-                            <a style="background-color: crimson;margin-top: 1px" class="dropdown-item" href="{{ route('user.dashboard') }}">Dashboard</a>
-                            <a style="background-color: crimson;margin-top: 1px" class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+                            <a style="background-color: crimson;margin-top: 1px" class="dropdown-item" href="{{ route('user.dashboard') }}"> <i class="fa fa-dashboard"></i>  Dashboard</a>
+                            <a style="background-color: crimson;margin-top: 1px" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"> <i class="fa fa-sign-out"></i>  Logout</a>
+                                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
                             @endif
                         </div>
                     </div>

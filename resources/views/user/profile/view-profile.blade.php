@@ -17,8 +17,8 @@
                 <div class="page-header float-right" >
                     <div class="page-title" >
                         <ol class="breadcrumb text-right" >
-                            <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                            <li><a href="{{ route('admin.profile') }}">Profile</a></li>
+                            <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
+                            <li><a href="{{ route('user.profile') }}">Profile</a></li>
                             <li class="active">My Profile</li>
                         </ol>
                     </div>
@@ -78,7 +78,7 @@
 <div class="col-md-8">
   <div class="card" style="border-bottom:solid 3px red;">
         <div class="card-header bg-danger text-white">
-            <h4>Admin Details</h4>
+            <h4>User Details</h4>
         </div>
         <div class="card-body">
             <div class="default-tab">
@@ -141,7 +141,7 @@
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                          
         <div class="card-body card-block">
-            <form action="{{ route('admin.profile.update') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="{{ route('user.profile.update') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                 @csrf
                   <div class="row form-group">
                     <div class="col col-md-3"><label for="email" class=" form-control-label">Email</label></div>
@@ -205,7 +205,7 @@
             </div>
                 <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                     <div class="card-body card-block">
-            <form action="{{ route('admin.password.update') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+            <form action="{{ route('user.password.update') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
                 @csrf
                   <div class="row form-group">
                     <div class="col col-md-3"><label for="old_password" class=" form-control-label">Old Password</label></div>

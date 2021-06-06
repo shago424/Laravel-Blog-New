@@ -25,16 +25,43 @@ Route::get('/all-categories/{slug}', [App\Http\Controllers\Frontend\FrontendCont
 
 Route::get('/all-tag-post/{name}', [App\Http\Controllers\Frontend\FrontendController::class, 'alltag'])->name('all-tag');
 Route::get('/search', [App\Http\Controllers\Frontend\FrontendController::class, 'search'])->name('search');
+Route::post('/post/comment/{post}', [App\Http\Controllers\Frontend\CommentController::class, 'commentstroe'])->name('comment.store');
+
+Route::post('/post/comment-reply/{comment}', [App\Http\Controllers\Frontend\CommentReplyController::class, 'commentreplystroe'])->name('comment.reply.store');
 
 
 Auth::routes();
 
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+// ///////////////////User Section ////////////////
+
+Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'user'],function(){ 
+    Route::get('user/dashboard',[App\Http\Controllers\user\UserDashboardController::class,'index'])->name('user.dashboard');
+      Route::get('profile',[App\Http\Controllers\user\UserDashboardController::class,'profile'])->name('user.profile');
+    Route::post('update/profile',[App\Http\Controllers\user\UserDashboardController::class,'profileupdate'])->name('user.profile.update');
+     Route::post('update/password',[App\Http\Controllers\user\UserDashboardController::class,'passwordupdate'])->name('user.password.update');
+
+
+    Route::get('comment-list',[App\Http\Controllers\user\CommentController::class,'index'])->name('user.comment.list');
+    Route::get('delete/{id}',[App\Http\Controllers\user\CommentController::class,'delete'])->name('user.comment.delete');
+    Route::get('active/{id}',[App\Http\Controllers\user\CommentController::class,'active'])->name('user.comment.active');
+    Route::get('inactive/{id}',[App\Http\Controllers\user\CommentController::class,'inactive'])->name('user.comment.inactive');
+
+
+});
 
 // ///////////////////Admin Section ////////////////
 
 Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'admin'],function(){ 
     Route::get('dashboard',[App\Http\Controllers\admin\AdminDashboardController::class,'index'])->name('admin.dashboard');
+
+    // Profile
+
     Route::get('profile',[App\Http\Controllers\admin\AdminDashboardController::class,'profile'])->name('admin.profile');
     Route::post('update/profile',[App\Http\Controllers\admin\AdminDashboardController::class,'profileupdate'])->name('admin.profile.update');
      Route::post('update/password',[App\Http\Controllers\admin\AdminDashboardController::class,'passwordupdate'])->name('admin.password.update');
@@ -77,16 +104,19 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'adm
     Route::get('active/{id}',[App\Http\Controllers\admin\UserController::class,'active'])->name('user.active');
     Route::get('inactive/{id}',[App\Http\Controllers\admin\UserController::class,'inactive'])->name('user.inactive');
 
-    // Profile
+
+     // Commnet section
+
+    Route::get('comment-list',[App\Http\Controllers\admin\CommentController::class,'index'])->name('comment.list');
+    Route::get('delete/{id}',[App\Http\Controllers\admin\CommentController::class,'delete'])->name('comment.delete');
+    Route::get('active/{id}',[App\Http\Controllers\admin\CommentController::class,'active'])->name('comment.active');
+    Route::get('inactive/{id}',[App\Http\Controllers\admin\CommentController::class,'inactive'])->name('comment.inactive');
+
+    
 
      
 
 
 });
 
-// ///////////////////User Section ////////////////
 
-Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'user'],function(){ 
-    Route::get('user/dashboard',[App\Http\Controllers\user\UserDashboardController::class,'index'])->name('user.dashboard');
-
-});

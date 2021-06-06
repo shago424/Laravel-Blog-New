@@ -7,13 +7,8 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                @if(Auth::user()->role_id == 1)
                 <a class="navbar-brand float-left" href="{{ route('admin.dashboard') }}"><img src="{{(!empty(Auth::user()->image))?url('upload/userimage/'.Auth::user()->image):url('upload/usernoimage.jpg')}}" width="50px" height="50px" alt="Logo" style="border-radius: 50%;margin-right:10px"></a>
                 <a class="navbar-brand float-left" href="{{ route('admin.dashboard') }}"><img src="{{ asset('backend') }}/images/logo.png" alt="Logo"></a>
-                @else
-                <a class="navbar-brand float-left" href="{{ route('user.dashboard') }}"><img src="{{(!empty(Auth::user()->image))?url('upload/userimage/'.Auth::user()->image):url('upload/usernoimage.jpg')}}" width="50px" height="50px" alt="Logo" style="border-radius: 50%;margin-right:10px"></a>
-                <a class="navbar-brand float-left" href="{{ route('user.dashboard') }}"><img src="{{ asset('backend') }}/images/logo.png" alt="Logo"></a>
-                @endif
                 
             </div> 
             <br>

@@ -60,7 +60,7 @@ class FrontendController extends Controller
         $data['query'] = $name;  
      $id = Tag::where('name',$name)->pluck('postID');
       $data['tagIdByPosts'] = Post::with('user','category','tags')->where('id',$id)
-      ->orderBy('id','DESC')->where('status',1)->unique('name')->paginate(8);
+      ->orderBy('id','DESC')->where('status',1)->paginate(8);
       // $data['post'] = Post::where('slug',$slug)->first();
          $data['populars'] = Post::inRandomOrder()->where('status',1)->limit(4)->get();
         $data['recents'] = Post::latest()->limit(4)->where('status',1)->get();
