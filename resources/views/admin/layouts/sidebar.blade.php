@@ -37,7 +37,10 @@
                         <a href="{{ route('post.list') }}"> <i class="menu-icon fa fa-users "></i>Post </a>
                     </li>
                     <li class="{{ request()->is('admin/comment-list') ? 'active' : '' }}">
-                        <a href="{{ route('comment.list') }}"> <i class="menu-icon fa fa-users "></i>Comment </a>
+                        <a href="{{ route('comment.list') }}"> <i class="menu-icon fa fa-comment "></i>Comment </a>
+                    </li>
+                    <li class="{{ request()->is('admin/comment/reply-list') ? 'active' : '' }}">
+                        <a href="{{ route('admin.comment.reply.list') }}"> <i class="menu-icon fa fa-comment "></i>Comment Reply </a>
                     </li>
                     {{--  <h3 class="menu-title">Setups</h3><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
@@ -82,7 +85,11 @@
                     <h3 class="menu-title">Setups</h3><!-- /.menu-title -->
                      
                     <li class="{{ request()->is('user/comment-list') ? 'active' : '' }}">
-                        <a href="{{ route('user.comment.list') }}"> <i class="menu-icon fa fa-users "></i>Comment </a>
+                        <a href="{{ route('user.comment.list') }}"> <i class="menu-icon fa fa-comment "></i>Comment </a>
+                    </li>
+
+                    <li class="{{ request()->is('user/comment/reply-list') ? 'active' : '' }}">
+                        <a href="{{ route('user.comment.reply.list') }}"> <i class="menu-icon fa fa-comment "></i>Comment Reply </a>
                     </li>
                     {{--  <h3 class="menu-title">Setups</h3><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">

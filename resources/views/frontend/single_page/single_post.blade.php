@@ -170,9 +170,13 @@
                             </div><!-- end custom-box -->
 
                             <hr class="invis1">
-
+                            @php
+                            $comment = $post->comments->count('id');
+                            // $reply  = $comment->replies->count('id');
+                            // $total = $comment+$reply;
+                            @endphp
                             <div class="custombox clearfix">
-                                <h4 class="small-title"> {{$post->comments->count('id')}} Comments</h4>
+                                <h4 class="small-title">{{ $comment }}  Comments</h4>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="comments-list">
@@ -201,10 +205,15 @@
                                                 <div class="media-body">
                                                     <h4 class="media-heading user_name">{{ $reply->user->name }} <small>{{ $reply->created_at->diffForHumans() }}</small></h4>
                                                     <p>{!! $reply->message !!}</p>
-                                                    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#comment-{{ $comment->id }}">
+                                                    @guest
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                      Comment Reply
+                                                    </button>
+                                                    @else
+                                                   {{--  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-{{ $reply->id }}">
                                                       Comment Reply
                                                     </button> --}}
-
+                                                    @endguest
                                                
                                                 </div>
                                                 
@@ -254,24 +263,103 @@
 
 
 
-            <script type="text/javascript">
-  $(document).on('change','#com_id', function(){
-    var reply = $(this).val();
-    
-      $('.message').hide();
-    
-       
-    
-  });
-</script>
-        </section>
-
         <!-- Button trigger modal -->
 
 
 <!-- Modal -->
+@guest
 @foreach($post->comments as $comment)
 <div class="modal fade" id="comment-{{ $comment->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-info">
+        <h5 class="modal-title" id="exampleModalLabel">Please Login To Comment Reply</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           
+                                
+                  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="" data-dismiss="modal"></button>
+       <button type="submit" class="" onclick="event.preventDefault();
+                                     document.getElementById('Comment-{{ $comment->id }}').submit();"></button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+@endforeach
+
+@else
+@foreach($post->comments as $comment)
+<div class="modal fade" id="comment-{{ $comment->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-info">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           
+                                
+    <div class="row">
+        <div class="col-lg-12">
+            <form method="POST" action="{{ route('comment.reply.store',$comment->id) }}" class="form-wrapper" id="Comment-{{ $comment->id }}">
+                @csrf
+                <textarea name="message" class="form-control"  >@ {{$comment->user->name }} </textarea>
+            
+        </div>
+    </div>
+                            
+      </div>
+      <div class="modal-footer bg-info">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       <button type="submit" class="btn btn-warning" onclick="event.preventDefault();
+                                     document.getElementById('Comment-{{ $comment->id }}').submit();">Comment Reply Submit</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+@endforeach
+@endguest
+
+{{-- Reply Reply Comment --}}
+
+@guest
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-info">
+        <h5 class="modal-title" id="exampleModalLabel">Please Login To Comment Reply</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="" data-dismiss="modal"></button>
+        <button type="button" class=""></button>
+      </div>
+    </div>
+  </div>
+</div>
+@else
+
+{{-- @foreach($comment->replies as $reply)
+<div class="modal fade" id="reply-{{ $reply->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-info">
@@ -285,9 +373,9 @@
                                 
     <div class="row">
         <div class="col-lg-12">
-            <form method="POST" action="{{ route('comment.reply.store',$comment->id) }}" class="form-wrapper" id="Comment-{{ $comment->id }}">
+            <form method="POST" action="{{ route('comment.reply.store',$reply->id) }}" class="form-wrapper" id="ReplyComment-{{ $reply->id }}">
                 @csrf
-                <textarea name="message" class="form-control" placeholder="Comment Reply"></textarea>
+                <textarea name="message" class="form-control"  >@ {{$reply->user->name }} </textarea>
             
         </div>
     </div>
@@ -296,22 +384,18 @@
       <div class="modal-footer bg-info">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
        <button type="submit" class="btn btn-warning" onclick="event.preventDefault();
-                                     document.getElementById('Comment-{{ $comment->id }}').submit();">Upadate Post</button>
+                                     document.getElementById('ReplyComment-{{ $reply->id }}').submit();">Reply Comment Submit</button>
       </div>
       </form>
     </div>
   </div>
 </div>
-@endforeach
+@endforeach --}}
+
+@endguest
 
 
                             
-                   {{--          </div>
-                          </div>
-                    </div><!-- end col -->
-                   
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </section> --}}
+                
 
   @endsection    

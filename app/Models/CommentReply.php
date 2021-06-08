@@ -14,7 +14,12 @@ class CommentReply extends Model
        return $this->belongsTo('App\Models\User');
     }
 
-     public function reply(){
+    public function post(){
+
+       return $this->belongsTo('App\Models\Post');
+    }
+
+    public function comment(){
 
        return $this->belongsTo('App\Models\Comment');
     }

@@ -30,13 +30,9 @@ class CommentController extends Controller
         Toastr::success('Comment Deleted Successfully');
             return redirect()->back();
         }else{
-        Toastr::success('You can not  delete this comment');
+        Toastr::error('You can not  delete this comment');
             return redirect()->back();
         }
-       
-      
-       
-
     }
 
 

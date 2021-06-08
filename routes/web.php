@@ -47,10 +47,19 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'user'
      Route::post('update/password',[App\Http\Controllers\user\UserDashboardController::class,'passwordupdate'])->name('user.password.update');
 
 
+     // Comment
+
     Route::get('comment-list',[App\Http\Controllers\user\CommentController::class,'index'])->name('user.comment.list');
-    Route::get('delete/{id}',[App\Http\Controllers\user\CommentController::class,'delete'])->name('user.comment.delete');
-    Route::get('active/{id}',[App\Http\Controllers\user\CommentController::class,'active'])->name('user.comment.active');
-    Route::get('inactive/{id}',[App\Http\Controllers\user\CommentController::class,'inactive'])->name('user.comment.inactive');
+   Route::get('delete-comment/{id}',[App\Http\Controllers\user\CommentController::class,'delete'])->name('user.comment.delete');
+    Route::get('active-comment/{id}',[App\Http\Controllers\user\CommentController::class,'active'])->name('user.comment.active');
+    Route::get('inactive-comment/{id}',[App\Http\Controllers\user\CommentController::class,'inactive'])->name('user.comment.inactive');
+
+    // Comment Reply
+     
+    Route::get('comment/reply-list',[App\Http\Controllers\user\CommentReplyController::class,'index'])->name('user.comment.reply.list');
+    Route::get('delete-reply/{id}',[App\Http\Controllers\user\CommentReplyController::class,'delete'])->name('user.comment.reply.delete');
+    Route::get('active-reply/{id}',[App\Http\Controllers\user\CommentReplyController::class,'active'])->name('user.comment.reply.active');
+    Route::get('inactive-reply/{id}',[App\Http\Controllers\user\CommentReplyController::class,'inactive'])->name('user.comment.reply.inactive');
 
 
 });
@@ -111,6 +120,13 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'adm
     Route::get('delete/{id}',[App\Http\Controllers\admin\CommentController::class,'delete'])->name('comment.delete');
     Route::get('active/{id}',[App\Http\Controllers\admin\CommentController::class,'active'])->name('comment.active');
     Route::get('inactive/{id}',[App\Http\Controllers\admin\CommentController::class,'inactive'])->name('comment.inactive');
+
+    // Commnet Reply section
+
+    Route::get('comment-reply-list',[App\Http\Controllers\admin\CommentReplyController::class,'index'])->name('admin.comment.reply.list');
+    Route::get('delete/reply/{id}',[App\Http\Controllers\admin\CommentReplyController::class,'delete'])->name('admin.comment.reply.delete');
+    Route::get('active/reply/{id}',[App\Http\Controllers\admin\CommentReplyController::class,'active'])->name('admin.comment.reply.active');
+    Route::get('inactive/reply/{id}',[App\Http\Controllers\admin\CommentReplyController::class,'inactive'])->name('admin.comment.reply.inactive');
 
     
 
