@@ -37,10 +37,10 @@ class Post extends Model
         return $this->hasMany('App\Models\Comment');
     } 
 
-    // public function replies()
-    // {
-    //     return $this->hasMany('App\Models\CommentReply');
-    // } 
+    public function likedUsers()
+    {
+        return $this->belongsToMany('App\Models\User')->withTimestamps();
+    } 
 
    
 }

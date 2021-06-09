@@ -12,8 +12,14 @@
                                         <h4><a href="{{ route('single_post',$first->slug) }}" title="">{{$first->title}}</a></h4>
                                         <small><a href="garden-single.html" title="">{{$first->created_at->diffForHumans() }}</a></small>
                                         <small><a href="#" title="">by {{ $first->user->name }}</a></small>
-                                        <small><a href="#" title=""><i class="fa fa-eye"></i> 23</a></small>
-                                        <small><a href="#" title=""><i class="fa fa-heart"></i> 23</a></small>
+                                        <small><i style="color:white" class="fa fa-eye"> {{ $first->view_count }}</i> </small>
+                                        @guest
+                                        <small><i style="color:white" class="fa fa-heart"> {{ $first->likedUsers->count() }} </i></small>
+                                        @else
+                                        <small><i style="color:{{ Auth::user()->likedPosts()->where('post_id',$first->id)->count() > 0  ? 'red'  : 'white' }}" class="fa fa-heart"> {{ $first->likedUsers->count() }}</i></small>
+                                        @endguest
+                                        
+
                                       <small><a href="{{route('single_post',$first->slug) }}" title=""><i class="fa fa-comment-o"></i> {{ $first->comments->count('id') }}</a></small>
                                     </div><!-- end meta -->
                                 </div><!-- end shadow-desc -->

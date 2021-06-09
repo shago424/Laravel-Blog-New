@@ -48,9 +48,13 @@
                                         <p>{!! Str::limit($post->body,110 )!!}</p>
                                         <small><a href="garden-single.html" title="">{{$post->created_at->diffForHumans() }}</a></small>
                                         <small><a href="#" title=""> by {{ $post->user->name }}</a></small>
-                                        <small><a href="garden-category.html" title=""><i class="fa fa-eye"></i> 1887</a></small>
-                                         <small><a href="#" title=""><i class="fa fa-heart"></i> 23</a></small>
-                                      <small><a href="{{route('single_post',$post->slug) }}" title=""><i class="fa fa-comment-o"></i> {{ $post->comments->count('id') }}</a></small>
+                                        <small><i class="fa fa-eye"></i> {{ $post->view_count }} View</a></small>
+                                          @guest
+                                        <small><i class="fa fa-heart"> {{ $post->likedUsers->count() }} Like this</i></small>
+                                        @else
+                                        <small><i style="color:{{ Auth::user()->likedPosts()->where('post_id',$post->id)->count() > 0  ? 'red'  : '' }}" class="fa fa-heart"> {{ $post->likedUsers->count() }} like this</i></small>
+                                        @endguest
+                                      <small><a href="{{route('single_post',$post->slug) }}" title=""><i class="fa fa-comment-o"></i> {{ $post->comments->count('id') }} Comments</a></small>
                                         
                                         
                                     </div><!-- end meta -->

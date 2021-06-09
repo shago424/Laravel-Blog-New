@@ -25,6 +25,9 @@ Route::get('/all-categories/{slug}', [App\Http\Controllers\Frontend\FrontendCont
 
 Route::get('/all-tag-post/{name}', [App\Http\Controllers\Frontend\FrontendController::class, 'alltag'])->name('all-tag');
 Route::get('/search', [App\Http\Controllers\Frontend\FrontendController::class, 'search'])->name('search');
+Route::post('/like-post/{post}', [App\Http\Controllers\Frontend\FrontendController::class, 'likePost'])->name('like.post');
+
+
 Route::post('/post/comment/{post}', [App\Http\Controllers\Frontend\CommentController::class, 'commentstroe'])->name('comment.store');
 
 Route::post('/post/comment-reply/{comment}', [App\Http\Controllers\Frontend\CommentReplyController::class, 'commentreplystroe'])->name('comment.reply.store');

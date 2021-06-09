@@ -39,11 +39,25 @@
                                 <h3>{{ $post->title }}</h3>
 
                                 <div class="blog-meta big-meta">
-                                    <small><a style="color:crimson;font-size: 14px;font-weight:bolder;" href="garden-single.html" title="">{{date('d-M-y h:A',strtotime($post->created_at))}}</a></small>
-                                    <small><a style="color:crimson;font-size: 14px;font-weight:bolder;" href="blog-author.html" title=""><i class="fa fa-user" style="color:crimson;font-size: 14px;font-weight:bolder;"></i> by {{ $post->user->name }}</a></small>
-                                    <small><a style="color:crimson;font-size: 14px;font-weight:bolder;" href="#" title=""><i class="fa fa-eye" style="color:crimson;font-size: 16px;font-weight:bolder;"></i> 2344</a></small>
-                                     <small><a style="color:crimson;font-size: 14px;font-weight:bolder;" href="#" title=""><i class="fa fa-heart" style="color:crimson;font-size: 16px;font-weight:bolder;"></i> 2344</a></small>
-                                      <small><a style="color:crimson;font-size: 14px;font-weight:bolder;" href="{{route('single_post',$post->slug) }}" title=""><i class="fa fa-comment-o" style="color:crimson;font-size: 16px;font-weight:bolder;"></i> {{ $post->comments->count('id') }}</a></small>
+                                    <small><a style="color:green;font-size: 14px;font-weight:bolder;" href="garden-single.html" title="">{{date('d-M-y h:A',strtotime($post->created_at))}}</a></small>
+                                    <small><a style="color:green;font-size: 14px;font-weight:bolder;" href="blog-author.html" title=""><i class="fa fa-user" style="color:green;font-size: 14px;font-weight:bolder;"></i> by {{ $post->user->name }}</a></small>
+                                    <small><i class="fa fa-eye" style="color:green;font-size: 16px;font-weight:bolder;"> {{ $post->view_count }} View </i></small>
+
+                                     <small>
+
+                                       @guest
+                                       <i class="fa fa-heart" style="color:green;font-size: 16px;font-weight:bolder;"> {{ $post->likedUsers->count() }}  </i>
+                                       @else
+                                        <a style="color:green;font-size: 14px;font-weight:bolder;" href="#" onclick="document.getElementById('like-form-{{ $post->id}}').submit();" title=" Post Like"><i class="fa fa-heart" style="color:{{ Auth::user()->likedPosts()->where('post_id',$post->id)->count() > 0  ? 'red'  : '' }};font-size: 16px;font-weight:bolder;"></i> {{ $post->likedUsers->count() }} </a>
+
+                                        <form action="{{ route('like.post',$post->id) }}" method="POST" style="display: none;" id="like-form-{{ $post->id }}">
+                                            @csrf
+                                        </form>
+                                       @endguest
+
+                                       </small>
+
+                                      <small><a style="color:green;font-size: 14px;font-weight:bolder;" href="{{route('single_post',$post->slug) }}" title=""><i class="fa fa-comment-o" style="color:green;font-size: 16px;font-weight:bolder;"></i> {{ $post->comments->count('id') }}</a></small>
                                 </div><!-- end meta -->
 
                                 <div class="post-sharing">
@@ -81,7 +95,29 @@
                                     
                                 </div><!-- end meta -->
 
-                                <div class="post-sharing">
+                                <div class="blog-meta big-meta mt-3 mb-3">
+                                    <small><a style="color:green;font-size: 14px;font-weight:bolder;" href="garden-single.html" title="">{{date('d-M-y h:A',strtotime($post->created_at))}}</a></small>
+                                    <small><a style="color:green;font-size: 14px;font-weight:bolder;" href="blog-author.html" title=""><i class="fa fa-user" style="color:green;font-size: 14px;font-weight:bolder;"></i> by {{ $post->user->name }}</a></small>
+                                    <small><i class="fa fa-eye" style="color:green;font-size: 16px;font-weight:bolder;"> {{ $post->view_count }} View</i> </small>
+
+                                     <small>
+
+                                       @guest
+                                       <i class="fa fa-heart" style="color:green;font-size: 16px;font-weight:bolder;"> {{ $post->likedUsers->count() }} </i>
+                                       @else
+                                        <a style="color:green;font-size: 14px;font-weight:bolder;" href="#" onclick="document.getElementById('like-form-{{ $post->id}}').submit();" title=" Post Like"><i class="fa fa-heart" style="color:{{ Auth::user()->likedPosts()->where('post_id',$post->id)->count() > 0  ? 'red'  : '' }};font-size: 16px;font-weight:bolder;"></i> {{ $post->likedUsers->count() }} </a>
+
+                                        <form action="{{ route('like.post',$post->id) }}" method="POST" style="display: none;" id="like-form-{{ $post->id }}">
+                                            @csrf
+                                        </form>
+                                       @endguest
+
+                                       </small>
+
+                                      <small><a style="color:green;font-size: 14px;font-weight:bolder;" href="{{route('single_post',$post->slug) }}" title=""><i class="fa fa-comment-o" style="color:green;font-size: 16px;font-weight:bolder;"></i> {{ $post->comments->count('id') }}</a></small>
+                                </div><!-- end meta -->
+
+                                <div class="post-sharing mt-3">
                                     <ul class="list-inline">
                                         <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
                                         <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>

@@ -67,4 +67,11 @@ class User extends Authenticatable
 
        return $this->hasMany('App\Models\CommentReply');
     }
+
+      public function likedPosts(){
+
+       return $this->belongsToMany('App\Models\Post')->withTimestamps();
+    }
+
+
 }

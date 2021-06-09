@@ -10,6 +10,9 @@ use App\Models\Tag;
 use Illuminate\Pagination\Paginator;
 use Carbon\Carbon;
 use Str;
+use Auth;
+use App\Models\User;
+use Session;
 class FrontendController extends Controller
 {
     public function index(){
@@ -27,6 +30,16 @@ class FrontendController extends Controller
     }
 
     public function single_post($slug){
+        $post= Post::where('slug',$slug)->first();
+
+        $postKey = 'post_'.$post->id;
+        if(!Session::has($postKey)){
+            $post->increment('view_count');
+            Session::put($postKey,1);
+        }
+
+
+
 
         $data['post'] = Post::where('slug',$slug)->first();
          $data['populars'] = Post::inRandomOrder()->where('status',1)->limit(4)->get();
@@ -93,5 +106,18 @@ class FrontendController extends Controller
          $data['importants'] = Post::inRandomOrder()->where('status',1)->where('status',1)->paginate(5);
         $data['first_sections'] = Post::inRandomOrder()->where('status',1)->where('status',1)->limit(3)->get();
         return view('frontend.single_page.search',$data);
+    }
+
+    public function likePost($post){
+
+        $user = Auth::user();
+        $likePost = $user->likedPosts()->where('post_id',$post)->count();
+        if($likePost == 0 ){
+            $user->likedPosts()->attach($post);
+        }else{
+            $user->likedPosts()->detach($post);
+        }
+
+        return redirect()->back();
     }
 }

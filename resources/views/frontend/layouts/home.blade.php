@@ -35,7 +35,11 @@
                                         <small><a href="garden-single.html" title="">{{$post->created_at->diffForHumans() }}</a></small>
                                         <small><a href="#" title=""> by {{ $post->user->name }}</a></small>
                                          <small><a href="garden-category.html" title=""><i class="fa fa-eye"></i> 1887</a></small>
-                                         <small><a href="#" title=""><i class="fa fa-heart"></i> 23</a></small>
+                                          @guest
+                                        <small><i class="fa fa-heart"> {{ $post->likedUsers->count() }}</i></small>
+                                        @else
+                                        <small><i style="color:{{ Auth::user()->likedPosts()->where('post_id',$post->id)->count() > 0  ? 'red'  : '' }}" class="fa fa-heart"> {{ $post->likedUsers->count() }}</i></small>
+                                        @endguest
                                       <small><a href="{{route('single_post',$post->slug) }}" title=""><i class="fa fa-comment-o"></i> {{ $post->comments->count('id') }}</a></small>
                                     </div><!-- end meta -->
                                 </div><!-- end blog-box -->

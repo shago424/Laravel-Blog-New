@@ -74,7 +74,7 @@
                                             <th>Category</th>
                                             <th width="20px">Title</th>
                                             <th>Post Date</th>
-                                            <th>Image</th>
+                                            <th class="text-center">View/Like</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -86,9 +86,9 @@
                                             <td>{{ $post->id }}</td>
                                             <td>{{ $post->user->name }}</td>
                                             <td>{{ $post->category->name }}</td>
-                                            <td>{{ $post->title }}</td>
+                                            <td><a href="{{ route('single_post',$post->slug) }}">{{ $post->title }}</a></td>
                                             <td>{{date('d-m-Y - h:A',strtotime( $post->created_at)) }}</td>
-                                            <td><img src="{{(!empty($post->image))?url('storage/post/'.$post->image):url('upload/usernoimage.jpg')}}" alt="{{ $post->image }}" width="50px" height="50px" /></td>
+                                            <td class="text-center"> <span class="badge badge-warning p-2"><i class="fa fa-eye"></i> {{ $post->view_count }}</span> <span class="badge badge-danger p-2"> <i class="fa fa-heart"></i> {{ $post->likedUsers->count() }}</span>{{-- <img src="{{(!empty($post->image))?url('storage/post/'.$post->image):url('upload/usernoimage.jpg')}}" alt="{{ $post->image }}" width="50px" height="50px" /> --}}</td>
                                            
                                             <td>
                                            @if($post->status == 1)
