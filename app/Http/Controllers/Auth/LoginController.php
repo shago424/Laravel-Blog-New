@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Laravel\Socialite\Facades\Socialite;
+use Auth;
+use App\Models\User;
+use Carbon\Carbon;
 class LoginController extends Controller
 {
     /*
@@ -36,5 +39,42 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from google.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback()
+    {
+        $user = Socialite::driver('google')->user();
+
+        $authUser = User::where('email',$user->email)->first();
+        if($authUser){
+            Auth::login($authUser);
+            return redirect()->route('public');
+        }else{
+            $newUser = new User();
+            $newUser->email = $user->email;
+            $newUser->name = $user->name;
+            $newUser->user_id = $user->id;
+            $newUser->password = uniqid();
+            $newUser->created_at = Carbon::now();
+            $newUser->save();
+
+            Auth::login($newUser);
+            return redirect()->route('public');
+        }
     }
 }

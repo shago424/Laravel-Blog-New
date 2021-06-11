@@ -28,13 +28,14 @@
                         <div class="user-menu dropdown-menu">
                               @if(Auth::user()->role_id == 1)
                             <a class="nav-link" href="{{ route('admin.profile') }}"><i class="fa fa-user"></i> My Profile</a>
+                             <a class="nav-link" href="{{ route('admin.post.like') }}"><i class="fa fa-heart"></i> Favourite Post</a>
                             @else
                             <a class="nav-link" href="{{ route('user.profile') }}"><i class="fa fa-user"></i> My Profile</a>
-                            
+                            <a class="nav-link" href="{{ route('user.post.like') }}"><i class="fa fa-heart"></i> Favourite Post</a>
                             @endif
 
 
-                            {{-- <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a> --}}
+                            
 
                             <a class="nav-link" href="#"><i class="fa fa-cog"></i> Settings</a>
 

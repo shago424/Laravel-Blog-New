@@ -89,9 +89,10 @@ class UserDashboardController extends Controller
             Toastr::error('Incorrect Old Password');
             return redirect()->back();
         }
+    }
 
-
-
+    public function userPostLiked(){
+        return view('user.liked.like-post');
     }
 
 }

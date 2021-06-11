@@ -48,7 +48,7 @@
                                        @guest
                                        <i class="fa fa-heart" style="color:green;font-size: 16px;font-weight:bolder;"> {{ $post->likedUsers->count() }}  </i>
                                        @else
-                                        <a style="color:green;font-size: 14px;font-weight:bolder;" href="#" onclick="document.getElementById('like-form-{{ $post->id}}').submit();" title=" Post Like"><i class="fa fa-heart" style="color:{{ Auth::user()->likedPosts()->where('post_id',$post->id)->count() > 0  ? 'red'  : '' }};font-size: 16px;font-weight:bolder;"></i> {{ $post->likedUsers->count() }} </a>
+                                        <a style="color:green;font-size: 14px;font-weight:bolder;" href="javascript:void(0);" onclick="document.getElementById('like-form-{{ $post->id}}').submit();" title=" Post Like"><i class="fa fa-heart" style="color:{{ Auth::user()->likedPosts()->where('post_id',$post->id)->count() > 0  ? 'red'  : '' }};font-size: 16px;font-weight:bolder;"></i> {{ $post->likedUsers->count() }} </a>
 
                                         <form action="{{ route('like.post',$post->id) }}" method="POST" style="display: none;" id="like-form-{{ $post->id }}">
                                             @csrf
@@ -105,7 +105,7 @@
                                        @guest
                                        <i class="fa fa-heart" style="color:green;font-size: 16px;font-weight:bolder;"> {{ $post->likedUsers->count() }} </i>
                                        @else
-                                        <a style="color:green;font-size: 14px;font-weight:bolder;" href="#" onclick="document.getElementById('like-form-{{ $post->id}}').submit();" title=" Post Like"><i class="fa fa-heart" style="color:{{ Auth::user()->likedPosts()->where('post_id',$post->id)->count() > 0  ? 'red'  : '' }};font-size: 16px;font-weight:bolder;"></i> {{ $post->likedUsers->count() }} </a>
+                                        <a style="color:green;font-size: 14px;font-weight:bolder;" href="javascript:void(0);" onclick="document.getElementById('like-form-{{ $post->id}}').submit();" title=" Post Like"><i class="fa fa-heart" style="color:{{ Auth::user()->likedPosts()->where('post_id',$post->id)->count() > 0  ? 'red'  : '' }};font-size: 16px;font-weight:bolder;"></i> {{ $post->likedUsers->count() }} </a>
 
                                         <form action="{{ route('like.post',$post->id) }}" method="POST" style="display: none;" id="like-form-{{ $post->id }}">
                                             @csrf

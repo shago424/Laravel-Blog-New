@@ -218,4 +218,9 @@ class PostController extends Controller
             return redirect()->back();
     }
 
+    public function postlikedusers($post){
+        $post = Post::findorfail($post);
+        return view('admin.post.like-post',compact('post'));
+    }
+
 }

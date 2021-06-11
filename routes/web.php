@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Laravel\Socialite\Facades\Socialite;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +35,10 @@ Route::post('/post/comment-reply/{comment}', [App\Http\Controllers\Frontend\Comm
 
 Auth::routes();
 
+// Socialite Login Google
+Route::get('login/google', [App\Http\Controllers\Auth\LoginController::class,'redirectToProvider']);
+Route::get('login/google/callback', [App\Http\Controllers\Auth\LoginController::class,'handleProviderCallback']);
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -48,6 +52,7 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'user'
       Route::get('profile',[App\Http\Controllers\user\UserDashboardController::class,'profile'])->name('user.profile');
     Route::post('update/profile',[App\Http\Controllers\user\UserDashboardController::class,'profileupdate'])->name('user.profile.update');
      Route::post('update/password',[App\Http\Controllers\user\UserDashboardController::class,'passwordupdate'])->name('user.password.update');
+     Route::get('liked-post--user',[App\Http\Controllers\user\UserDashboardController::class,'userPostLiked'])->name('user.post.like');
 
 
      // Comment
@@ -71,6 +76,8 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'user'
 
 Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'admin'],function(){ 
     Route::get('dashboard',[App\Http\Controllers\admin\AdminDashboardController::class,'index'])->name('admin.dashboard');
+    Route::get('liked-post',[App\Http\Controllers\admin\AdminDashboardController::class,'userPostLiked'])->name('admin.post.like');
+     
 
     // Profile
 
@@ -101,6 +108,7 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'adm
     Route::get('post/delete/{id}',[App\Http\Controllers\admin\PostController::class,'delete'])->name('post.delete');
      Route::get('post/active/{id}',[App\Http\Controllers\admin\PostController::class,'active'])->name('post.active');
      Route::get('post/inactive/{id}',[App\Http\Controllers\admin\PostController::class,'inactive'])->name('post.inactive');
+     Route::get('post/like-user/{post}',[App\Http\Controllers\admin\PostController::class,'postlikedusers'])->name('admin.post.like.user');
     
 
 
@@ -132,10 +140,13 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'adm
     Route::get('inactive/reply/{id}',[App\Http\Controllers\admin\CommentReplyController::class,'inactive'])->name('admin.comment.reply.inactive');
 
     
+});
 
-     
-
-
+// Mail Sent
+Route::get('/sent-mail', function () {
+    
+    $post = Post::findOrFail(1);
+    return (new App\Mail\NewPost($post))->render();
 });
 
 
