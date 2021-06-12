@@ -90,7 +90,7 @@
                                 <div class="tag-cloud-single">
                                     <span>Tags</span>
                                     @foreach($tags as $tag)
-                                    <big><a href="{{ route('all-tag',$tag->name) }}" title="">{{$tag->name}}</a></big>
+                                    <big><a href="{{ route('all-tag',$tag->name) }}" title=""> <span  style="background-color:red;">{{$tag->name}}</span> </a></big>
                                     @endforeach
                                     
                                 </div><!-- end meta -->

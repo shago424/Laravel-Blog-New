@@ -36,8 +36,12 @@ Route::post('/post/comment-reply/{comment}', [App\Http\Controllers\Frontend\Comm
 Auth::routes();
 
 // Socialite Login Google
-Route::get('login/google', [App\Http\Controllers\Auth\LoginController::class,'redirectToProvider']);
+Route::get('login/google', [App\Http\Controllers\Auth\LoginController::class,'redirectToProvider'])->name('google.login');
 Route::get('login/google/callback', [App\Http\Controllers\Auth\LoginController::class,'handleProviderCallback']);
+
+// Socialite Login Facebook
+Route::get('login/facebook', [App\Http\Controllers\Auth\LoginController::class,'fbredirectToProvider'])->name('facebook.login');
+Route::get('login/facebook/callback', [App\Http\Controllers\Auth\LoginController::class,'fbhandleProviderCallback']);
 
 
 
@@ -120,9 +124,11 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'adm
     Route::get('user-list',[App\Http\Controllers\admin\UserController::class,'index'])->name('user.list');
     Route::get('user-create',[App\Http\Controllers\admin\UserController::class,'create'])->name('user.create');
     Route::post('update/{id}',[App\Http\Controllers\admin\UserController::class,'update'])->name('user.update');
-    Route::get('delete/{id}',[App\Http\Controllers\admin\UserController::class,'delete'])->name('user.delete');
+    ;
     Route::get('active/{id}',[App\Http\Controllers\admin\UserController::class,'active'])->name('user.active');
-    Route::get('inactive/{id}',[App\Http\Controllers\admin\UserController::class,'inactive'])->name('user.inactive');
+     Route::get('user-inactive/{id}',[App\Http\Controllers\admin\UserController::class,'inactive'])->name('user.inactive');
+      Route::get('user-delete/{id}',[App\Http\Controllers\admin\UserController::class,'delete'])->name('user.delete');
+    
 
 
      // Commnet section

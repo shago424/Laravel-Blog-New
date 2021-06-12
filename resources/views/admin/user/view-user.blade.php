@@ -54,6 +54,7 @@
                                             <th>#</th>
                                             <th>Id</th>
                                             <th>Name</th>
+                                            <th>User ID</th>
                                             <th>Role</th>
                                             <th>Email</th>
                                             <th>Status</th>
@@ -66,6 +67,7 @@
                                             <td>{{ $key+1 }}</td>
                                             <td>{{ $user->id }}</td>
                                             <td>{{ $user->name }}</td>
+                                            <td>{{ $user->user_id }}</td>
                                             <td>{{ $user->role->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>

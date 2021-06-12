@@ -77,4 +77,41 @@ class LoginController extends Controller
             return redirect()->route('public');
         }
     }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function fbredirectToProvider()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    /**
+     * Obtain the user information from facebook.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function fbhandleProviderCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+
+        $authUser = User::where('email',$user->email)->first();
+        if($authUser){
+            Auth::login($authUser);
+            return redirect()->route('public');
+        }else{
+            $newUser = new User();
+            $newUser->email = $user->email;
+            $newUser->name = $user->name;
+            $newUser->user_id = $user->id;
+            $newUser->password = uniqid();
+            $newUser->created_at = Carbon::now();
+            $newUser->save();
+
+            Auth::login($newUser);
+            return redirect()->route('public');
+        }
+    }
 }
