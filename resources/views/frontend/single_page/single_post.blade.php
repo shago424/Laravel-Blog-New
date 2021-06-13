@@ -246,9 +246,9 @@
                                                       Comment Reply
                                                     </button>
                                                     @else
-                                                   {{--  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-{{ $reply->id }}">
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-{{ $reply->comment_id }}">
                                                       Comment Reply
-                                                    </button> --}}
+                                                    </button>
                                                     @endguest
                                                
                                                 </div>
@@ -394,8 +394,8 @@
 </div>
 @else
 
-{{-- @foreach($comment->replies as $reply)
-<div class="modal fade" id="reply-{{ $reply->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach($comment->replies as $reply)
+<div class="modal fade" id="reply-{{ $reply->comment_id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-info">
@@ -409,7 +409,7 @@
                                 
     <div class="row">
         <div class="col-lg-12">
-            <form method="POST" action="{{ route('comment.reply.store',$reply->id) }}" class="form-wrapper" id="ReplyComment-{{ $reply->id }}">
+            <form method="POST" action="{{ route('comment.reply.store',$reply->comment_id) }}" class="form-wrapper" id="ReplyComment-{{ $reply->comment_id }}">
                 @csrf
                 <textarea name="message" class="form-control"  >@ {{$reply->user->name }} </textarea>
             
@@ -420,13 +420,13 @@
       <div class="modal-footer bg-info">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
        <button type="submit" class="btn btn-warning" onclick="event.preventDefault();
-                                     document.getElementById('ReplyComment-{{ $reply->id }}').submit();">Reply Comment Submit</button>
+                                     document.getElementById('ReplyComment-{{ $reply->comment_id }}').submit();">Reply Comment Submit</button>
       </div>
       </form>
     </div>
   </div>
 </div>
-@endforeach --}}
+@endforeach
 
 @endguest
 
