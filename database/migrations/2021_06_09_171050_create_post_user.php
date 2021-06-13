@@ -18,6 +18,12 @@ class CreatePostUser extends Migration
             $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+             // Delete all favorite on delete post
+
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            // Delete all post on delete users
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

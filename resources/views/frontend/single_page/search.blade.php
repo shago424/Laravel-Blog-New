@@ -38,7 +38,7 @@
                                     <div class="col-md-4">
                                         <div class="post-media">
                                             <a href="{{ route('single_post',$post->slug) }}" title="">
-                                                <img src="{{(!empty($post->image))?url('storage/post/'.$post->image):url('upload/usernoimage.jpg')}}" alt="{{ $post->title }}" class="img-fluid">
+                                                <img src="{{(!empty($post->image))?url('storage/post/'.$post->image):url('upload/usernoimage.jpg')}}" alt="{{ $post->title }}" class="img-fluid" style="width:260px;height: 200px">
                                                 <div class="hovereffect"></div>
                                             </a>
                                         </div><!-- end media -->
@@ -47,7 +47,7 @@
                                     <div class="blog-meta big-meta col-md-8">
                                         <span class="bg-aqua"><a href="{{ route('all-category',$post->category->slug) }}" title="">{{ $post->category->name }}</a></span>
                                         <h4><a href="{{ route('single_post',$post->slug) }}" title="">{{ $post->title }}</a></h4>
-                                        <p>{!! Str::limit($post->body,110 )!!}</p>
+                                        <p>{!! Str::limit($post->body,140 )!!}</p>
                                         <small><a href="garden-single.html" title="">{{$post->created_at->diffForHumans() }}</a></small>
                                         <small><a href="#" title=""> by {{ $post->user->name }}</a></small>
                                         <small><i class="fa fa-eye"></i> {{ $post->view_count }} View</a></small>

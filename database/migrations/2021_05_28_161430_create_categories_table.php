@@ -20,9 +20,14 @@ class CreateCategoriesTable extends Migration
             $table->text('description')->nullable();
             $table->string('image')->nullable();
             $table->tinyinteger('status')->default(1);
-            $table->integer('created_by')->nullable();
-            $table->integer('updted_by')->nullable();
+            // $table->integer('created_by')->nullable();
+            // $table->integer('updted_by')->nullable();
             $table->timestamps();
+
+            // Delete all comments on delete users
+            // $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            // // Delete all comments on delete users
+            // $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

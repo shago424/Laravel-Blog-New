@@ -25,6 +25,9 @@ class CreatePostsTable extends Migration
             $table->boolean('status')->default(1);
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
+
+            // Delete all posts on delete users
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

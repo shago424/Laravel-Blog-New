@@ -49,7 +49,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->slug = Str::slug($request->name,'-');
         $category->description = $request->description;
-        $category->created_by = Auth::user()->id;
+        // $category->created_by = Auth::user()->id;
         $category->image = $imageName;
         $category->save();
 
@@ -115,7 +115,7 @@ class CategoryController extends Controller
         $category->slug = Str::slug($request->name,'-');
         $category->description = $request->description;
         $category->image = $imageName;
-        $category->updated_by = Auth::user()->id;
+        // $category->updated_by = Auth::user()->id;
         
         $category->save();
 

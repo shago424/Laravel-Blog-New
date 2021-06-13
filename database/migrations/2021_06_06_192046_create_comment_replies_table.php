@@ -15,11 +15,17 @@ class CreateCommentRepliesTable extends Migration
     {
         Schema::create('comment_replies', function (Blueprint $table) {
             $table->id();
-            $table->integer('comment_id');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('comment_id');
+            $table->unsignedBigInteger('user_id');
             $table->text('message');
             $table->boolean('status')->default(1);
             $table->timestamps();
+
+             // Delete all comments on delete post
+
+            $table->foreign('comment_id')->references('id')->on('comments')->onDelete('cascade');
+             // Delete all comments Reply on delete users
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

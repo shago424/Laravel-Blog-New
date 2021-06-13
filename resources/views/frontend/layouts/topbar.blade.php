@@ -27,11 +27,13 @@
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a style="background-color: crimson;margin-top: -8px" class="dropdown-item" href="{{ route('admin.profile') }}"><i class="fa fa-user"></i> My Profile</a>
+                            
 
                             {{-- <a class="nav-link" href="#"><i class="fa fa-user"></i> Notifications <span class="count">13</span></a> --}}
                             
                              @if(Auth::user()->role_id ==1)
+                             <a style="background-color: crimson;margin-top: -8px" class="dropdown-item" href="{{ route('admin.profile') }}"><i class="fa fa-user"></i> {{ Auth::user()->name }}</a>
+                            <a style="background-color: crimson;margin-top: 1px" class="dropdown-item" href="{{ route('admin.profile') }}"><i class="fa fa-user"></i> My Profile</a>
                              <a style="background-color: crimson;margin-top: 1px" class="dropdown-item" href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
                             <a style="background-color: crimson;margin-top: 1px" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i>Logout</a>
@@ -39,6 +41,8 @@
                                         @csrf
                                     </form>
                             @elseif(Auth::user()->role_id ==2)
+                            <a style="background-color: crimson;margin-top: -8px" class="dropdown-item" href="{{ route('user.profile') }}"><i class="fa fa-user"></i> {{ Auth::user()->name }}</a>
+                            <a style="background-color: crimson;margin-top: 1px" class="dropdown-item" href="{{ route('user.profile') }}"><i class="fa fa-user"></i> My Profile</a>
                             <a style="background-color: crimson;margin-top: 1px" class="dropdown-item" href="{{ route('user.dashboard') }}"> <i class="fa fa-dashboard"></i>  Dashboard</a>
                             <a style="background-color: crimson;margin-top: 1px" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"> <i class="fa fa-sign-out"></i>  Logout</a>

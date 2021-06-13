@@ -155,7 +155,7 @@
                                              <div class="row form-group">
                                                 <div class="col col-md-3"><label for="image" class=" form-control-label">Image</label></div>
                                                 <div class="col-12 col-md-9">
-                                                    <img src="{{(empty($category->image))?:url('upload/usernoimage.jpg')}}" alt="{{ $category->image }}" width="50px" height="50px" />
+                                                    <img src="{{url('upload/usernoimage.jpg')}}" alt="" width="50px" height="50px" />
                                                   <input type="file" id="image" name="image"  class="form-control" ><span class="help-block">
                                                     <span class="help-block"><font style="color:red">{{($errors)->has('image')?($errors->first('image')):''}}</font></span></div>
                                             </div>

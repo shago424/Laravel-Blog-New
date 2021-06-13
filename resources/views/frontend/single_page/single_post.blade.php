@@ -207,8 +207,10 @@
 
                             <hr class="invis1">
                             @php
+                            // $com = App\Models\Comment::all();
                             $comment = $post->comments->count('id');
-                            // $reply  = $comment->replies->count('id');
+                            
+                            // $reply  = App\Models\CommentReply::where('id',$com->id)->get();
                             // $total = $comment+$reply;
                             @endphp
                             <div class="custombox clearfix">
@@ -217,6 +219,7 @@
                                     <div class="col-lg-12">
                                         <div class="comments-list">
                                             @foreach($post->comments->where('status',1) as $comment)
+                                           {{ $comment->replies->count('id') }}
                                             <div class="media">
                                                 <a class="media-left" href="#">
                                                     <img src="{{(!empty($comment->user->image))?url('upload/userimage/'.$comment->user->image):url('upload/usernoimage.jpg')}}" alt="{{ $comment->user->name }}" class="rounded-circle" width="50px" height="50px">
@@ -233,7 +236,9 @@
                                                      <div class="row pt-3 message">
                                                 <div class="col-lg-12">
                                                     <div class="comments-list">
+
                                             @foreach($comment->replies as $reply)
+                                               
                                             <div class="media">
                                                 <a class="media-left" href="#">
                                                     <img src="{{(!empty($reply->user->image))?url('upload/userimage/'.$reply->user->image):url('upload/usernoimage.jpg')}}" alt="{{ $reply->user->name }}" class="rounded-circle" width="50px" height="50px">
@@ -243,8 +248,9 @@
                                                     <p>{!! $reply->message !!}</p>
                                                     @guest
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                                      Comment Reply
+                                                      Comment Reply  
                                                     </button>
+
                                                     @else
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reply-{{ $reply->comment_id }}">
                                                       Comment Reply
@@ -331,6 +337,7 @@
 @endforeach
 
 @else
+
 @foreach($post->comments as $comment)
 <div class="modal fade" id="comment-{{ $comment->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -348,7 +355,7 @@
         <div class="col-lg-12">
             <form method="POST" action="{{ route('comment.reply.store',$comment->id) }}" class="form-wrapper" id="Comment-{{ $comment->id }}">
                 @csrf
-                <textarea name="message" class="form-control"  >@ {{$comment->user->name }} </textarea>
+                <textarea name="message" class="form-control"  >@ {{$comment->user->name }} --- </textarea>
             
         </div>
     </div>
@@ -394,6 +401,7 @@
 </div>
 @else
 
+@if($post->comments->count() > 0 )
 @foreach($comment->replies as $reply)
 <div class="modal fade" id="reply-{{ $reply->comment_id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -427,6 +435,8 @@
   </div>
 </div>
 @endforeach
+@else
+@endif
 
 @endguest
 
