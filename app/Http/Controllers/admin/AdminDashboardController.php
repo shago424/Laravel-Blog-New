@@ -6,13 +6,25 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use App\Models\Comment;
+use App\Models\CommentReply;
+use App\Models\Post;
+use App\Models\Category;
 use Toastr;
 use Hash;
+
+use Str;
 class AdminDashboardController extends Controller
 {
     public function index(){
-    
-        return view('admin.layouts.home');
+
+        $data['posts']= Post::all();
+        $data['categories']= Category::all();
+        $data['comments']= Comment::latest()->get();
+        $data['rcomments']= CommentReply::all();
+        $data['users']= User::all();
+
+        return view('admin.layouts.home',$data);
 
     }
 

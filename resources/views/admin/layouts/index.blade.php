@@ -55,8 +55,8 @@
 
 
     <script src="{{ asset('backend') }}/vendors/chart.js/dist/Chart.bundle.min.js"></script>
-    <script src="assets/js/dashboard.js"></script>
-    <script src="assets/js/widgets.js"></script>
+    <script src="{{ asset('backend') }}/assets/js/dashboard.js"></script>
+    <script src="{{ asset('backend') }}/assets/js/widgets.js"></script>
     <script src="{{ asset('backend') }}/vendors/jqvmap/dist/jquery.vmap.min.js"></script>
     <script src="{{ asset('backend') }}/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <script src="{{ asset('backend') }}/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>

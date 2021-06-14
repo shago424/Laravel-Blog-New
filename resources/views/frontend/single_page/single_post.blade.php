@@ -60,12 +60,34 @@
                                       <small><a style="color:green;font-size: 14px;font-weight:bolder;" href="{{route('single_post',$post->slug) }}" title=""><i class="fa fa-comment-o" style="color:green;font-size: 16px;font-weight:bolder;"></i> {{ $post->comments->count('id') }}</a></small>
                                 </div><!-- end meta -->
 
-                                <div class="post-sharing">
-                                    <ul class="list-inline">
-                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
-                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
-                                        <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
-                                    </ul>
+                                <div class="post-sharing" >
+                                     <ul><li><div class="addthis_inline_share_toolbox_zvrc "></div></li></ul>
+                 
+                                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                                        {{-- <div class="addthis_inline_share_toolbox p-2"></div> --}}
+                                    
+                                    </div>
+                                     <div class="fb-share-button pb-2 p-2" 
+                                        data-href="https://www.your-domain.com/your-page.html" 
+                                        data-layout="button_count">
+                                        </div>
+                                    {{-- <ul class="list-inline">
+                                        <li><a href="#"  id="gmail-btn"><i class="fa fa-envelope-o" aria-hidden="true" class="btn btn-primary" style="color:#cf3e39;font-size:2rem;padding: 5px"></i></a></li>
+
+                                        <li><a href="#" id="facebook-btn"><i class="fa fa-facebook-square" aria-hidden="true" class="btn btn-primary" style="color:#3b5998;font-size:2rem;padding: 5px"></i></a></li>
+
+                                        <li><a href="#" id="gplus-btn"><i class="fa fa-google-plus-square" aria-hidden="true" class="btn btn-primary" style="color:#dd4b39;font-size:2rem;padding: 5px"></i></a></li>
+
+                                        <li><a href="#" id="twitter-btn"><i class="fa fa-twitter-square" aria-hidden="true" class="btn btn-primary" style="color:#1da1f2;font-size:2rem;padding: 5px"></i></a></li>
+
+                                        <li><a href="#" id="linked-btn"><i class="fa fa-linkedin-square" aria-hidden="true" class="btn btn-primary" style="color:#0077b5;font-size:2rem;padding: 5px"></i></a></li>
+
+                                        <li><a href="#" id="whatsapp-btn"><i class="fa fa-whatsapp" aria-hidden="true" class="btn btn-primary" style="color:lightgreen;font-size:2rem;padding: 5px"></i></a></li>
+
+                                        <li><a href="#" id="whatsapp-btn"><i class="fa fa-share-square" aria-hidden="true" class="btn btn-primary" style="color:lightblue;font-size:2rem;padding: 5px"></i></a></li>
+
+                                        </ul> --}}
+                                    <button class="btn btn-primary p-2" id="share-btn2" ><i class="fa fa-share"></i> Share</button> 
                                 </div><!-- end post-sharing -->
                             </div><!-- end title -->
 
@@ -117,12 +139,27 @@
                                       <small><a style="color:green;font-size: 14px;font-weight:bolder;" href="{{route('single_post',$post->slug) }}" title=""><i class="fa fa-comment-o" style="color:green;font-size: 16px;font-weight:bolder;"></i> {{ $post->comments->count('id') }}</a></small>
                                 </div><!-- end meta -->
 
-                                <div class="post-sharing mt-3">
+                                <div class="post-sharing mt-3" id="social-links">
                                     <ul class="list-inline">
-                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
+                                        <div class="addthis_inline_share_toolbox_zvrc "></div>
+                                      {{--   <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
                                         <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
-                                        <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li> --}}
+
+                                          {{-- <li><a href="#" ><i class="fa fa-envelope-o" aria-hidden="true" class="btn btn-primary" style="color:#cf3e39;font-size:2rem;padding: 5px"></i></a></li>
+
+                                        <li><a href="#" ><i class="fa fa-facebook-square" aria-hidden="true" class="btn btn-primary" style="color:#3b5998;font-size:2rem;padding: 5px"></i></a></li>
+
+                                        <li><a href="#" ><i class="fa fa-google-plus-square" aria-hidden="true" class="btn btn-primary" style="color:#dd4b39;font-size:2rem;padding: 5px"></i></a></li>
+
+                                        <li><a href="#" ><i class="fa fa-twitter-square" aria-hidden="true" class="btn btn-primary" style="color:#1da1f2;font-size:2rem;padding: 5px"></i></a></li>
+
+                                        <li><a href="#" ><i class="fa fa-linkedin-square" aria-hidden="true" class="btn btn-primary" style="color:#0077b5;font-size:2rem;padding: 5px"></i></a></li>
+
+                                        <li><a href="#" ><i class="fa fa-whatsapp" aria-hidden="true" class="btn btn-primary" style="color:lightgreen;font-size:2rem;padding: 5px"></i></a></li> --}}
                                     </ul>
+
+                                    <button class="btn btn-primary p-2"   id="share-btn"><i class="fa fa-share"></i> Share</button>
                                 </div><!-- end post-sharing -->
                             </div><!-- end title -->
 
@@ -219,7 +256,7 @@
                                     <div class="col-lg-12">
                                         <div class="comments-list">
                                             @foreach($post->comments->where('status',1) as $comment)
-                                           {{ $comment->replies->count('id') }}
+                                           
                                             <div class="media">
                                                 <a class="media-left" href="#">
                                                     <img src="{{(!empty($comment->user->image))?url('upload/userimage/'.$comment->user->image):url('upload/usernoimage.jpg')}}" alt="{{ $comment->user->name }}" class="rounded-circle" width="50px" height="50px">
@@ -440,7 +477,63 @@
 
 @endguest
 
+<script>
+    const gmailBtn = document.getElementById('gmail-btn');
+    const facebookBtn = document.getElementById('facebook-btn');
+    const gplusBtn = document.getElementById('gplus-btn');
+    const twitterBtn = document.getElementById('twitter-btn');
+    const linkedBtn = document.getElementById('linked-btn');
+    const whatsappBtn = document.getElementById('whatsapp-btn');
+    // const socialBtn = document.getElementById('social-links');
 
+    let postUrl = encodeURI(document.location.href);
+    let postTitle = encodeURI('{{ $post->title }}');
+
+    facebookBtn.setAttribute("href",`https://www.facebook.com/sharer.php?u=${postUrl}`);
+    gmailBtn.setAttribute("href",`https://www.mail.google.com/mail/?view=cm&su=${postTitle}&body=${postUrl}`);
+
+// Share Button
+const shareBtn = document.getElementById('share-btn');
+const shareBtn2 = document.getElementById('share-btn2');
+
+if(navigator.share){
+shareBtn.style.display ='block';
+// socialBtn.style.display = 'block';
+shareBtn.addEventListener('click',() =>{
+navigator.share({
+title:postTitle,
+url:postUrl
+}).then((result)=>{
+    alert('Thank You For Sharing')
+}).catch((error)=>{
+console.log(error);
+});
+});
+}else{
+
+
+}
+
+if(navigator.share){
+shareBtn2.style.display ='block';
+// socialBtn.style.display = 'block';
+shareBtn2.addEventListener('click',() =>{
+navigator.share({
+title:postTitle,
+url:postUrl
+}).then((result)=>{
+    alert('Thank You For Sharing')
+}).catch((error)=>{
+console.log(error);
+});
+});
+}else{
+
+
+}
+
+
+</script>
                             
                 
 

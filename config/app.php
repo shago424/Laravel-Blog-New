@@ -164,6 +164,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Brian2694\Toastr\ToastrServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        App\Providers\GoogleDriveServiceProvider::class,
 
         /*
          * Package Service Providers...

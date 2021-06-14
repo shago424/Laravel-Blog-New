@@ -23,8 +23,8 @@ class FrontendController extends Controller
         $data['hots'] = Post::latest()->where('status',1)->paginate(5);
          $data['importants'] = Post::inRandomOrder()->where('status',1)->paginate(5);
         $data['first_sections'] = Post::inRandomOrder()->where('status',1)->limit(3)->get();
-        $data['sidebar_categories'] = Category::latest()->where('status',1)->get();
-        $data['header_categories'] = Category::latest()->where('status',1)->get();
+        $data['sidebar_categories'] = Category::where('status',1)->get();
+        $data['header_categories'] = Category::where('status',1)->get();
         return view('frontend.layouts.home',$data);
 
     }
@@ -44,8 +44,8 @@ class FrontendController extends Controller
         $data['post'] = Post::where('slug',$slug)->first();
          $data['populars'] = Post::inRandomOrder()->where('status',1)->limit(4)->get();
         $data['recents'] = Post::latest()->where('status',1)->limit(4)->get();
-        $data['sidebar_categories'] = Category::latest()->where('status',1)->where('status',1)->get();
-        $data['header_categories'] = Category::latest()->where('status',1)->get();
+        $data['sidebar_categories'] = Category::where('status',1)->where('status',1)->get();
+        $data['header_categories'] = Category::where('status',1)->get();
          $data['hots'] = Post::latest()->where('status',1)->paginate(5);
          $data['importants'] = Post::inRandomOrder()->where('status',1)->paginate(5);
         $data['first_sections'] = Post::inRandomOrder()->where('status',1)->limit(3)->get();
@@ -61,8 +61,8 @@ class FrontendController extends Controller
       $data['post'] = Post::where('slug',$slug)->first();
          $data['populars'] = Post::inRandomOrder()->where('status',1)->where('status',1)->limit(4)->get();
         $data['recents'] = Post::latest()->limit(4)->where('status',1)->where('status',1)->get();
-        $data['sidebar_categories'] = Category::latest()->where('status',1)->where('status',1)->get();
-        $data['header_categories'] = Category::latest()->where('status',1)->where('status',1)->get();
+        $data['sidebar_categories'] = Category::where('status',1)->where('status',1)->get();
+        $data['header_categories'] = Category::where('status',1)->where('status',1)->get();
          $data['hots'] = Post::latest()->where('status',1)->where('status',1)->paginate(5);
          $data['importants'] = Post::inRandomOrder()->where('status',1)->where('status',1)->paginate(5);
         $data['first_sections'] = Post::inRandomOrder()->where('status',1)->where('status',1)->limit(3)->get();
@@ -77,8 +77,8 @@ class FrontendController extends Controller
       // $data['post'] = Post::where('slug',$slug)->first();
          $data['populars'] = Post::inRandomOrder()->where('status',1)->limit(4)->get();
         $data['recents'] = Post::latest()->limit(4)->where('status',1)->get();
-        $data['sidebar_categories'] = Category::latest()->where('status',1)->get();
-        $data['header_categories'] = Category::latest()->where('status',1)->get();
+        $data['sidebar_categories'] = Category::where('status',1)->get();
+        $data['header_categories'] = Category::where('status',1)->get();
          $data['hots'] = Post::latest()->where('status',1)->paginate(5);
          $data['importants'] = Post::inRandomOrder()->where('status',1)->paginate(5);
         $data['first_sections'] = Post::inRandomOrder()->where('status',1)->limit(3)->get();
@@ -100,8 +100,8 @@ class FrontendController extends Controller
      
          $data['populars'] = Post::inRandomOrder()->where('status',1)->where('status',1)->limit(4)->get();
         $data['recents'] = Post::latest()->limit(4)->where('status',1)->where('status',1)->get();
-        $data['sidebar_categories'] = Category::latest()->where('status',1)->where('status',1)->get();
-        $data['header_categories'] = Category::latest()->where('status',1)->where('status',1)->get();
+        $data['sidebar_categories'] = Category::where('status',1)->where('status',1)->get();
+        $data['header_categories'] = Category::where('status',1)->where('status',1)->get();
          $data['hots'] = Post::latest()->where('status',1)->where('status',1)->paginate(5);
          $data['importants'] = Post::inRandomOrder()->where('status',1)->where('status',1)->paginate(5);
         $data['first_sections'] = Post::inRandomOrder()->where('status',1)->where('status',1)->limit(3)->get();

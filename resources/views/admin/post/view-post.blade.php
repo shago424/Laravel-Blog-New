@@ -88,7 +88,7 @@
                                             <td>{{ $post->category->name }}</td>
                                             <td><a href="{{ route('single_post',$post->slug) }}">{{ $post->title }}</a></td>
                                             <td>{{date('d-m-Y - h:A',strtotime( $post->created_at)) }}</td>
-                                            <td class="text-center"> <span  class="btn btn-warning p-2"><i class="fa fa-eye"></i> {{ $post->view_count }}</span> <a href="{{ route('admin.post.like.user',$post->id) }}" class="btn btn-danger"> <i class="fa fa-heart"></i> {{ $post->likedUsers->count() }}</a>{{-- <img src="{{(!empty($post->image))?url('storage/post/'.$post->image):url('upload/usernoimage.jpg')}}" alt="{{ $post->image }}" width="50px" height="50px" /> --}}</td>
+                                            <td class="text-center"> <span  class="btn btn-warning btn-sm "><i class="fa fa-eye"></i> {{ $post->view_count }}</span> <a href="{{ route('admin.post.like.user',$post->id) }}" class="btn btn-danger btn-sm"> <i class="fa fa-heart"></i> {{ $post->likedUsers->count() }}</a>{{-- <img src="{{(!empty($post->image))?url('storage/post/'.$post->image):url('upload/usernoimage.jpg')}}" alt="{{ $post->image }}" width="50px" height="50px" /> --}}</td>
                                            
                                             <td>
                                            @if($post->status == 1)
