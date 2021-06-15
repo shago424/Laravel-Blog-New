@@ -29,7 +29,7 @@
               <button type="button" class="close" data-dismiss="alert">&times;</button>
               <strong>{{session::get('message')}}</strong> </div> 
             @endif
-                <div class="row">
+                <div class="row pb-3">
                  
                     <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                         <div class="page-wrapper">

@@ -9,10 +9,10 @@
                 </button>
                 @if(Auth::user()->role_id == 1)
                 <a class="navbar-brand float-left" href="{{ route('admin.dashboard') }}"><img src="{{(!empty(Auth::user()->image))?url('upload/userimage/'.Auth::user()->image):url('upload/usernoimage.jpg')}}" width="50px" height="50px" alt="Logo" style="border-radius: 50%;margin-right:10px"></a>
-                <a class="navbar-brand float-left" href="{{ route('admin.dashboard') }}"><img src="{{ asset('backend') }}/images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand float-left" href="{{ route('admin.dashboard') }}"><p style="margin-top: 15px;color: #fff;">{{Auth::user()->name}}</p></a>
                 @else
                 <a class="navbar-brand float-left" href="{{ route('user.dashboard') }}"><img src="{{(!empty(Auth::user()->image))?url('upload/userimage/'.Auth::user()->image):url('upload/usernoimage.jpg')}}" width="50px" height="50px" alt="Logo" style="border-radius: 50%;margin-right:10px"></a>
-                <a class="navbar-brand float-left" href="{{ route('user.dashboard') }}"><img src="{{ asset('backend') }}/images/logo.png" alt="Logo"></a>
+                <a class="navbar-brand float-left" href="{{ route('user.dashboard') }}"><p style="margin-top: 15px;color: #fff;">{{Auth::user()->name}}</p></a>
                 @endif
                 
             </div> 
@@ -41,6 +41,9 @@
                     </li>
                     <li class="{{ request()->is('admin/comment/reply-list') ? 'active' : '' }}">
                         <a href="{{ route('admin.comment.reply.list') }}"> <i class="menu-icon fa fa-comment "></i>Comment Reply </a>
+                    </li>
+                    <li class="{{ request()->is('admin/liked-post') ? 'active' : '' }}">
+                        <a href="{{ route('admin.post.like') }}"> <i class="menu-icon fa fa-heart "></i>Favourite Posts </a>
                     </li>
                     {{--  <h3 class="menu-title">Setups</h3><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
@@ -83,6 +86,9 @@
                         <a href="{{ route('user.dashboard') }}"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                     </li>
                     <h3 class="menu-title">Setups</h3><!-- /.menu-title -->
+                     <li class="{{ request()->is('user/post-list') ? 'active' : '' }}">
+                        <a href="{{ route('user.post.list') }}"> <i class="menu-icon fa fa-file "></i>Post </a>
+                    </li>
                      
                     <li class="{{ request()->is('user/comment-list') ? 'active' : '' }}">
                         <a href="{{ route('user.comment.list') }}"> <i class="menu-icon fa fa-comment "></i>Comment </a>
@@ -90,6 +96,9 @@
 
                     <li class="{{ request()->is('user/comment/reply-list') ? 'active' : '' }}">
                         <a href="{{ route('user.comment.reply.list') }}"> <i class="menu-icon fa fa-comment "></i>Comment Reply </a>
+                    </li>
+                     <li class="{{ request()->is('user/liked-post--user') ? 'active' : '' }}">
+                        <a href="{{ route('user.post.like') }}"> <i class="menu-icon fa fa-heart "></i>Favourite Posts </a>
                     </li>
                     {{--  <h3 class="menu-title">Setups</h3><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">

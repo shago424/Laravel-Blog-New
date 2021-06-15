@@ -7,7 +7,7 @@
                     <div class="header-left">
                       @if(Auth::user()->role_id == 1)
                     <a href="{{ route('user.dashboard') }}"><i class="fa fa-home"></i> Home</a>
-                    <a target="_blank" href="{{ route('public') }}"><i class="fa fa-web"></i> Blog Site</a>
+                    <a class="btn btn-primary" target="_blank" href="{{ route('public') }}"><i class="fa fa-web"></i> Blog Site</a>
                        @else
                         <a href="{{ route('admin.dashboard') }}"><i class="fa fa-home"></i> Home</a>
                         <a class="btn btn-primary" target="_blank" href="{{ route('public') }}"><i class="fab fa-webinternet-explorer"></i> Blog Site</a>
@@ -25,7 +25,7 @@
                             <img class="user-avatar rounded-circle" src="{{(!empty(Auth::user()->image))?url('upload/userimage/'.Auth::user()->image):url('upload/usernoimage.jpg')}}" width="30px" height="30px" alt="User Avatar">
                         </a>
 
-                        <div class="user-menu dropdown-menu">
+                        <div class="user-menu dropdown-menu"> 
                               @if(Auth::user()->role_id == 1)
                             <a class="nav-link" href="{{ route('admin.profile') }}"><i class="fa fa-user"></i> My Profile</a>
                              <a class="nav-link" href="{{ route('admin.post.like') }}"><i class="fa fa-heart"></i> Favourite Post</a>

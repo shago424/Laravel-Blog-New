@@ -1,0 +1,226 @@
+<?php
+
+namespace App\Http\Controllers\user;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Role;
+use Auth;
+use Toastr;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\Tag;
+use Str;
+use Storage;
+Use Image;
+use Carbon\Carbon;
+
+class PostController extends Controller
+{
+   public function index(){
+    
+        $posts = Post::where('user_id',Auth::user()->id)->latest()->get();
+        $categories = Category::orderby('name','ASC')->get();
+        return view('user.post.view-post',compact('posts','categories'));
+
+    }
+
+
+     public function create(){
+    
+       $categories = Category::orderby('name','ASC')->get();
+        return view('user.post.add-post',compact('categories'));
+
+    }
+
+
+     public function store(Request $request)
+    {
+
+       $this->validate($request, [
+            'title' => 'required',
+             'image' => 'required|sometimes|image|mimes:png,jpg,jpeg,bmp',
+            // 'slug' => 'required',
+            'body' => 'required',
+            // 'tag' => 'required',
+            
+        ]);
+
+
+        // image
+        $slug = Str::slug($request->title, '-');
+        $image = $request->image;
+        $imageName = $slug . '-'  . uniqid() . Carbon::now()->timestamp . '.' .$image->getClientOriginalExtension();
+
+        if(!Storage::disk('public')->exists('post')){
+            Storage::disk('public')->makeDirectory('post');
+        }
+
+        $img = Image::make($image)->resize(300, null, function ($constraint) {
+          $constraint->aspectRatio();
+          $constraint->upsize();
+        })->stream();
+
+
+        Storage::disk('public')->put('post/' . $imageName, $img);
+
+
+        $post = new Post();
+        $post->title = $request->title;
+        $post->category_id = $request->category_id; 
+        $post->slug = $slug;
+        $post->body = $request->body;
+        
+        $post->user_id = Auth::user()->id;
+        $post->image = $imageName;
+        $post->save();
+
+        $tags = [];
+        $stringtags = explode(',', $request->tags);
+        foreach ($stringtags as $tag){
+            array_push($tags,['name' => $tag]);
+        }
+
+        $post->tags()->createMany($tags);
+
+
+        if($post){
+             Toastr::success('Post Added Successfully');
+            return redirect()->route('user.post.list'); 
+        }else{
+                 Toastr::error('Post Added Not Successfully');
+            return redirect()->route('user.post.list'); 
+        }
+
+       
+
+    }
+
+       public function edit($id){
+        $post = Post::find($id);
+       $categories = Category::orderby('name','ASC')->get();
+        return view('admin.post.edit-post',compact('post','categories'));
+
+    }
+
+     public function update(Request $request,$id)
+    {
+
+        if($request->title == Post::findorfail($id)->title){
+            $this->validate($request, [
+            'title' => 'required',
+            // 'image' => 'sometimes|image|mimes:png,jpg,jpeg,bmp',
+           
+            'body' => 'required',
+            
+        ]);
+
+        }else{
+             $this->validate($request, [
+            'title' => 'required|unique:posts',
+            // 'image' => 'sometimes|image|mimes:png,jpg,jpeg,bmp',
+
+            'body' => 'required',
+            
+        ]);
+
+        }
+
+       
+        $post = Post::findorfail($id);
+     $slug = Str::slug($request->title, '-');
+
+     
+        if(isset($request->image)){
+
+        // image
+       
+        $image = $request->image;
+        $imageName = $slug . '-'  . uniqid() . Carbon::now()->timestamp . '.' .$image->getClientOriginalExtension();
+
+        if(!Storage::disk('public')->exists('post')){
+            Storage::disk('public')->makeDirectory('post');
+        }
+
+         if(Storage::disk('public')->exists('post/' . $post->image)){
+            Storage::disk('public')->delet('post/' . $post->image);
+        }
+
+        $img = Image::make($image)->resize(752, null, function ($constraint) {
+          $constraint->aspectRatio();
+          $constraint->upsize();
+        })->stream();
+
+
+        Storage::disk('public')->put('post/' . $imageName, $img);
+    }else{
+
+        $imageName = $post->image;
+
+    }
+       
+        $post->title = $request->title;
+        $post->category_id = $request->category_id; 
+        $post->slug = $slug;
+        $post->body = $request->body;
+        
+        $post->updated_by = Auth::user()->id;
+        $post->image = $imageName;
+        $post->save();
+
+        $post->tags()->delete();
+        $tags = [];
+        $stringtags = explode(',', $request->tags);
+        foreach ($stringtags as $tag){
+            array_push($tags,['name' => $tag]);
+        }
+
+        $post->tags()->createMany($tags);
+        
+       
+
+        if($post){
+             Toastr::success('Success','Post Updated Successfully');
+            return redirect()->route('user.post.list');
+        }else{
+                 Toastr::error('Post Updated Not Successfully');
+            return redirect()->route('user.post.list'); 
+        }
+    }
+
+     public function delete($id){
+    
+     
+        $post = Post::findorfail($id);
+        
+        $post->delete();
+        Toastr::success('Post Deleted Successfully');
+            return redirect()->back();
+      
+       
+
+    }
+
+
+     public function active($id){
+         $post = Post::findorfail($id);
+         $post->status = 1;
+         $post->save();
+        Toastr::success('Success','Post Activated Successfully');
+            return redirect()->back();
+    }
+
+    public function inactive($id){
+        $post = Post::findorfail($id);
+         $post->status = 0;
+         $post->save();
+        Toastr::success('Success','Post Inactivated Successfully');
+            return redirect()->back();
+    }
+
+    public function postlikedusers($post){
+        $post = Post::findorfail($post);
+        return view('user.post.like-post',compact('post'));
+    }
+}

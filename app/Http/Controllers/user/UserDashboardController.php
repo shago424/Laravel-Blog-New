@@ -6,13 +6,22 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use App\Models\Comment;
+use App\Models\CommentReply;
+use App\Models\Post;
+use App\Models\Category;
 use Toastr;
 use Hash;
 class UserDashboardController extends Controller
 {
     public function index(){
-    
-        return view('user.layouts.home');
+
+       $data['posts']= Post::where('id',Auth::user()->id)->get();
+       
+        $data['comments']= Comment::where('id',Auth::user()->id)->latest()->get();
+        $data['rcomments']= CommentReply::where('id',Auth::user()->id)->latest()->get();
+        
+        return view('user.layouts.home',$data);
 
     }
 

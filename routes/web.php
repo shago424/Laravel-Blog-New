@@ -58,6 +58,18 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'user'
      Route::post('update/password',[App\Http\Controllers\user\UserDashboardController::class,'passwordupdate'])->name('user.password.update');
      Route::get('liked-post--user',[App\Http\Controllers\user\UserDashboardController::class,'userPostLiked'])->name('user.post.like');
 
+       // Post section
+
+    Route::get('user-post-list',[App\Http\Controllers\user\PostController::class,'index'])->name('user.post.list');
+    Route::get('user-post-create',[App\Http\Controllers\user\PostController::class,'create'])->name('user.post.create');
+    Route::get('user-post-edit/{id}',[App\Http\Controllers\user\PostController::class,'edit'])->name('user.post.edit');
+     Route::post('post/store',[App\Http\Controllers\user\PostController::class,'store'])->name('user.post.store');
+    Route::post('post/update/{id}',[App\Http\Controllers\user\PostController::class,'update'])->name('user.post.update');
+    Route::get('user-post/delete/{id}',[App\Http\Controllers\user\PostController::class,'delete'])->name('user.post.delete');
+     Route::get('user-post/active/{id}',[App\Http\Controllers\user\PostController::class,'active'])->name('user.post.active');
+     Route::get('user-post/inactive/{id}',[App\Http\Controllers\user\PostController::class,'inactive'])->name('user.post.inactive');
+     Route::get('user-post/like-user/{post}',[App\Http\Controllers\user\PostController::class,'postlikedusers'])->name('user.post.like.user');
+
 
      // Comment
 
@@ -72,6 +84,8 @@ Route::group(['prefix'=>'user','middleware'=>['user','auth'],'namespace'=>'user'
     Route::get('delete-reply/{id}',[App\Http\Controllers\user\CommentReplyController::class,'delete'])->name('user.comment.reply.delete');
     Route::get('active-reply/{id}',[App\Http\Controllers\user\CommentReplyController::class,'active'])->name('user.comment.reply.active');
     Route::get('inactive-reply/{id}',[App\Http\Controllers\user\CommentReplyController::class,'inactive'])->name('user.comment.reply.inactive');
+
+
 
 
 });
