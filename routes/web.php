@@ -27,6 +27,9 @@ Route::get('/all-tag-post/{name}', [App\Http\Controllers\Frontend\FrontendContro
 Route::get('/search', [App\Http\Controllers\Frontend\FrontendController::class, 'search'])->name('search');
 Route::post('/like-post/{post}', [App\Http\Controllers\Frontend\FrontendController::class, 'likePost'])->name('like.post');
 
+Route::get('contact-us', [App\Http\Controllers\Frontend\FrontendController::class, 'contactView'])->name('contact.us');
+Route::post('contact-us/store', [App\Http\Controllers\Frontend\FrontendController::class, 'contactStroe'])->name('contact.store');
+
 
 Route::post('/post/comment/{post}', [App\Http\Controllers\Frontend\CommentController::class, 'commentstroe'])->name('comment.store');
 
@@ -158,6 +161,12 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth'],'namespace'=>'adm
     Route::get('delete/reply/{id}',[App\Http\Controllers\admin\CommentReplyController::class,'delete'])->name('admin.comment.reply.delete');
     Route::get('active/reply/{id}',[App\Http\Controllers\admin\CommentReplyController::class,'active'])->name('admin.comment.reply.active');
     Route::get('inactive/reply/{id}',[App\Http\Controllers\admin\CommentReplyController::class,'inactive'])->name('admin.comment.reply.inactive');
+
+
+    // Contact Us
+
+    Route::get('contact-list',[App\Http\Controllers\admin\ContactController::class,'index'])->name('contact.list');
+    Route::get('contact-delete/{id}',[App\Http\Controllers\admin\ContactController::class,'delete'])->name('contact.delete');
 
     
 });

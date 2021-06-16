@@ -114,33 +114,37 @@
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header" style="background:#605ca8;color: #fff">
-                                <h5 class="modal-title" id="mediumModalLabel">Post Title : {{-- {{ $comment->post->title }} --}}</h5>
+                                <h5 class="modal-title" id="mediumModalLabel">Post Title : {{ $comment->comment->post->title }}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                 <table id="bootstrap-data-table-export" class="table table-hover  table-sm" >
-                                    <thead>
-                                        <tr style="background-color: #001f3f;color: white">
-                                            <th>#</th>
-                                            <th>ID</th>
-                                            <th>Comment User</th>
-                                            <th>Date</th>
-                                            <th>Comment</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($replies as $key => $comment)
-                                        <tr>
-                                            <td>{{ $key+1 }}</td>
-                                            <td>{{ $comment->id }}</td>
-                                            <td>{{ $comment->user->name }}</td>
+                                 <table  class="table table-hover  table-bordered table-sm" >
+                                     <tr>
+                                            <th width="25%">Date</th>
                                             <td>{{$comment->created_at->diffForHumans() }}</td>
-                                            <td>{{ $comment->comment }}</td>
                                         </tr>
-                                        @endforeach
-                                    </tbody>
+                                        <tr>
+                                            <th>ID</th>
+                                            <td>{{ $key+1 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Name</th>
+                                            <td>{{ $comment->user->name }}</td>
+                                        </tr>
+                                       
+                                        <tr>
+                                           <th>Comment To</th>
+                                            <td>{{ $comment->comment->comment }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Reply Comment</th>
+                                            <td>{{ $comment->message }}</td>
+                                           
+                                        </tr>
+                                        
+                                        
                                 </table>
                             </div>
                             <div class="modal-footer" style="background:#605ca8;color: #fff">

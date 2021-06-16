@@ -40,18 +40,24 @@ class UserDashboardController extends Controller
             'ocap' => 'required',
             'about' => 'required',
             'name' => 'required',
-            'user_id' => 'required',
+            // 'user_id' => 'required',
         ]);
 
          
 
         $user = User::find(Auth::user()->id);
-        $user->user_id = $request->user_id;
+        // $user->user_id = $request->user_id;
         $user->name = $request->name;
         $user->address = $request->address;
         $user->mobile = $request->mobile;
         $user->ocap = $request->ocap;
         $user->about = $request->about;
+
+        $user->facebook = $request->facebook;
+        $user->youtube = $request->youtube;
+        $user->twitter = $request->twitter;
+        $user->instagram = $request->instagram;
+        $user->website = $request->website;
 
          if ($request->file('image')){
           $file = $request->file('image');

@@ -18,8 +18,8 @@
                     <div class="page-title" >
                         <ol class="breadcrumb text-right" >
                             <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                            <li><a href="{{ route('comment.list') }}">Comment</a></li>
-                            <li class="active">Comment List</li>
+                            <li><a href="{{ route('contact.list') }}">Contact</a></li>
+                            <li class="active">Contact List</li>
                         </ol>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header" style="background:#605ca8;color: #fff">
-                                <strong class="card-title">Comment List
+                                <strong class="card-title">Contact List
                                 </strong>
                             </div>
                             <div class="card-body">
@@ -51,39 +51,28 @@
                                     <thead>
                                         <tr style="background-color: #001f3f;color: white">
                                             <th>#</th>
-                                            <th>ID</th>
-                                            <th>Comment User</th>
-                                            <th>Post Title</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Mobile</th>
+                                            <th>Subject</th>
                                             <th>Date</th>
-                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($comments as $key => $comment)
+                                        @foreach($contacts as $key => $contact)
                                         <tr>
                                             <td>{{ $key+1 }}</td>
-                                            <td>{{ $comment->id }}</td>
-                                            <td>{{ $comment->user->name }}</td>
-                                            <td><a target="_blank" href="{{ route('single_post',$comment->post->slug) }}">{{ $comment->post->title }}</a></td>
-                                            <td>{{$comment->created_at->diffForHumans() }}</td>
-                                            <td>
-                                           @if($comment->status == 1)
-                                            <span class="badge badge-success p-2">Published</span>
-                                            @else
-                                             <span class="badge badge-danger p-2">Draft</span>
-                                             @endif
-                                          </td>
+                                            <td>{{ $contact->name }}</td>
+                                            <td>{{ $contact->email }}</td>
+                                            <td>{{ $contact->mobile }}</td>
+                                            <td>{{ $contact->subject }}</td>
+                                            <td>{{date('d-M-Y h:i A',strtotime($contact->created_at)) }}</td>
                                             <td class="text-center">
-                                                 @if($comment->status == 1)
-                                            <a href="{{ route('comment.inactive',$comment->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-arrow-down"></i></a>
-                                            @else
-                                             <a href="{{ route('comment.active',$comment->id) }}" class="btn btn-sm btn-success"><i class="fa fa-arrow-up"></i></a>
-                                            @endif
-                                             <button type="button" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#viewcomment-{{ $comment->id }}">
+                                             <button type="button" class="btn btn-primary btn-sm " data-toggle="modal" data-target="#viewcontact-{{ $contact->id }}">
                                                     <i class="fa fa-eye"></i>
                                             </button>
-                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletecomment-{{ $comment->id }}">
+                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletecontact-{{ $contact->id }}">
                                                     <i class="fa fa-trash"></i>
                                             </button>
                                             </td>
@@ -107,39 +96,50 @@
 
 {{-- All Modal --}}
 <div class="animated">
-@foreach($comments as $comment)
-<div class="modal fade" id="viewcomment-{{ $comment->id }}" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+@foreach($contacts as $contact)
+<div class="modal fade" id="viewcontact-{{ $contact->id }}" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header" style="background:#605ca8;color: #fff">
-                                <h5 class="modal-title" id="mediumModalLabel">Post Title : {{ $comment->post->title }}</h5>
+                                <h5 class="modal-title" id="mediumModalLabel"> Name: {{ $contact->name }}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <table  class="table table-hover table-bordered  table-sm" >
-                                    <thead>
+                                 <table id="" class="table table-hover table-bordered  table-sm " >
                                         <tr >
                                             <th width="25%">Comment ID</th>
-                                            <td>{{ $comment->id }}</td>
+                                            <td>{{ $contact->id }}</td>
                                         </tr>
                                           <tr>
-                                            <th>Comment User</th>
-                                            <td>{{ $comment->user->name }}</td>
+                                            <th>Name</th>
+                                            <td>{{ $contact->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email</th>
+                                            <td>{{ $contact->email }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mobile</th>
+                                            <td>{{ $contact->mobile }}</td>
+                                        </tr>
+                                        <tr>       
+                                            <th>Subject</th>
+                                             <td>{{ $contact->subject }}</td>
                                         </tr>
                                         <tr>
                                             <th>Date</th>
-                                            <td>{{$comment->created_at->diffForHumans() }}
+                                            <td>{{date('d-M-Y h:a',strtotime($contact->created_at)) }}
                                          </td>
                                          </tr>
-                                         <tr>       
-                                            <th>Comment</th>
-                                             <td>{{ $comment->comment }}</td>
+                                         
+                                        <tr >       
+                                            <th>Message</th>
+                                             <td ><textarea rows="8" class="form-control">{{ $contact->message }}</textarea></td>
                                         </tr>
-                                        
-                                        
-                                    </tbody>
+                                    
+                                    
                                 </table>
                             </div>
                             <div class="modal-footer" style="background:#605ca8;color: #fff">
@@ -152,27 +152,27 @@
 
 
 
-                {{-- Delete comment Modal --}}
+                {{-- Delete contact Modal --}}
 
-                 <div class="modal fade" id="deletecomment-{{ $comment->id }}" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-backdrop="static">
+                 <div class="modal fade" id="deletecontact-{{ $contact->id }}" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-backdrop="static">
                     <div class="modal-dialog modal-sm" role="document">
                         <div class="modal-content">
                             <div class="modal-header" style="background:#605ca8;color: #fff">
-                                <h5 class="modal-title" id="staticModalLabel">Delete comment</h5>
+                                <h5 class="modal-title" id="staticModalLabel">Delete Contact</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <p>
-                                    Are you sure delete this comment?
+                                    Are you sure delete this contact?
                                 </p>
                             </div>
                             <div class="modal-footer" style="background:#605ca8;color: #fff">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                                 <button type="button" class="btn btn-warning" onclick="event.preventDefault();
-                                 document.getElementById('deleteComment-{{ $comment->id }}').submit();">Confirm</button>
-                                 <form action="{{ route('comment.delete',$comment->id) }}" style="display:none" id="deleteComment-{{ $comment->id }}"></form>
+                                 document.getElementById('deleteContact-{{ $contact->id }}').submit();">Confirm</button>
+                                 <form action="{{ route('contact.delete',$contact->id) }}" style="display:none" id="deleteContact-{{ $contact->id }}"></form>
                             </div>
                         </div>
                     </div>

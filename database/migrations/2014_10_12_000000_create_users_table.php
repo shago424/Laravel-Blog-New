@@ -23,6 +23,12 @@ class CreateUsersTable extends Migration
             $table->string('address')->nullable();
             $table->string('mobile')->nullable();
             $table->string('ocap')->nullable();
+
+            $table->string('facebook')->unique();
+            $table->string('youtube')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('website')->nullable();
             $table->string('image')->default('default.jpg');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

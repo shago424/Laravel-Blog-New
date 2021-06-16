@@ -27,6 +27,12 @@ class User extends Authenticatable
         'image',
         'ocap',
         'role_id',
+        'facebook',
+        'youtube',
+        'twitter',
+        'instagram',
+        'website',
+        
     ];
 
     /**

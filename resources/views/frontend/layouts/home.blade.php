@@ -30,7 +30,7 @@
                                     <div class="blog-meta big-meta col-md-8">
                                         <span class="bg-aqua"><a href="{{ route('all-category',$post->category->slug) }}" title="">{{ $post->category->name }}</a></span>
                                         <h4><a href="{{ route('single_post',$post->slug) }}" title="">{{ $post->title }}</a></h4>
-                                        <p>{!! Str::limit($post->body, 250 )!!}</p>
+                                        <p>{!! Str::limit($post->body, 275 )!!}</p>
                                        
                                         <small><a href="garden-single.html" title="">{{$post->created_at->diffForHumans() }}</a></small>
                                         <small><a href="#" title=""> by {{ $post->user->name }}</a></small>
@@ -49,20 +49,16 @@
                             </div><!-- end blog-list -->
                         </div><!-- end page-wrapper -->
 {{ $posts->links() }}
-                      {{--   <hr class="invis">
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination justify-content-start">
-
-                                        <li class="page-item"><a class="page-link" href="#"></a></li>
-                                       
-                                    </ul>
-                                </nav>
-                            </div><!-- end col -->
-                        </div> --}}<!-- end row -->
-<hr style="border:solid 2px red;">
+                       <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="banner-spot clearfix">
+                                        <div class="banner-img">
+                                            <img src="{{ asset('frontend') }}/upload/banner_01.jpg" alt="" class="img-fluid">
+                                        </div><!-- end banner-img -->
+                                    </div><!-- end banner -->
+                                </div><!-- end col -->
+                            </div><!-- end row -->
+                    <hr style="border:solid 2px red;">
                         {{-- Hot --}}
                           <div class="row">
                            

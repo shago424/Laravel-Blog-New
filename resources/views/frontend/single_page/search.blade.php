@@ -72,7 +72,65 @@
 
                         </div><!-- end page-wrapper -->
 {{ $posts->links() }}
-                        <hr class="invis">
+
+        <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="banner-spot clearfix">
+                                        <div class="banner-img">
+                                            <img src="{{ asset('frontend') }}/upload/banner_01.jpg" alt="" class="img-fluid">
+                                        </div><!-- end banner-img -->
+                                    </div><!-- end banner -->
+                                </div><!-- end col -->
+                            </div><!-- end row -->
+                    <hr style="border:solid 2px red;">
+                        {{-- Hot --}}
+                          <div class="row">
+                           
+                             <div class="col-md-6">
+                              <div class="widget">
+                                <h2 class="widget-title">Hot Posts</h2>
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        @foreach($hots as $hot)
+                                        <a href="{{ route('single_post',$hot->slug) }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="w-100 justify-content-between">
+                                                <img src="{{(!empty($hot->image))?url('storage/post/'.$hot->image):url('upload/usernoimage.jpg')}}" alt="{{ $hot->title }}" alt="" class="img-fluid float-left">
+                                                <h5 class="mb-1">{{$hot->title}}</h5>
+                                                <small>{{$hot->created_at->diffForHumans() }}</small>
+                                            </div>
+                                        </a>
+                                        @endforeach
+                                     
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end page-wrapper -->
+                      {{ $hots->links() }}
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="widget">
+                                <h2 class="widget-title">Important Posts</h2>
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        @foreach($importants as $important)
+                                        <a href="{{ route('single_post',$important->slug) }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="w-100 justify-content-between">
+                                                <img src="{{(!empty($important->image))?url('storage/post/'.$important->image):url('upload/usernoimage.jpg')}}" alt="{{ $important->title }}" alt="" class="img-fluid float-left">
+                                                <h5 class="mb-1">{{$important->title}}</h5>
+                                                <small>{{$important->created_at->diffForHumans() }}</small>
+                                            </div>
+                                        </a>
+                                        @endforeach
+                                     
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div>
+
+                            {{ $importants->links() }}
+                            </div>
+
+                          </div>
+                        
 
                     <!-- end row -->
                     </div><!-- end col -->

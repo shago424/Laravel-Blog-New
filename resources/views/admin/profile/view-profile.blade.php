@@ -151,7 +151,7 @@
                
                <div class="row form-group">
                     <div class="col col-md-3"><label for="user_id" class=" form-control-label"> User ID</label></div>
-                    <div class="col-12 col-md-9"><input type="text" id="user_id" name="user_id" placeholder="Enter User ID" class="form-control" value="{{ $user->user_id }}">
+                    <div class="col-12 col-md-9"><input type="text" id="user_id" name="user_id" placeholder="Enter User ID" disabled="" class="form-control" value="{{ $user->user_id }}">
                     </div>
                 </div>
                  <div class="row form-group">
@@ -176,7 +176,37 @@
                 </div>
 
                  <div class="row form-group">
-                    <div class="col col-md-3"><label for="address" class=" form-control-label"> Image</label></div>
+                    <div class="col col-md-3"><label for="facebook" class=" form-control-label"> Facebook Link</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="facebook" name="facebook" placeholder="Enter Facebook Link" class="form-control" value="{{ $user->facebook }}">
+                    </div>
+                </div>
+
+                 <div class="row form-group">
+                    <div class="col col-md-3"><label for="youtube" class=" form-control-label"> Youtube Link</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="youtube" name="youtube" placeholder="Enter Youtube Link" class="form-control" value="{{ $user->youtube }}">
+                    </div>
+                </div>
+
+                 <div class="row form-group">
+                    <div class="col col-md-3"><label for="twitter" class=" form-control-label"> Twitter Link</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="twitter" name="twitter" placeholder="Enter Twitter Link" class="form-control" value="{{ $user->twitter }}">
+                    </div>
+                </div>
+
+                 <div class="row form-group">
+                    <div class="col col-md-3"><label for="instagram" class=" form-control-label"> Instagram Link</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="instagram" name="instagram" placeholder="Enter Instagram Link" class="form-control" value="{{ $user->instagram }}">
+                    </div>
+                </div>
+
+                 <div class="row form-group">
+                    <div class="col col-md-3"><label for="website" class=" form-control-label"> Website Link</label></div>
+                    <div class="col-12 col-md-9"><input type="text" id="website" name="website" placeholder="Enter Website Link" class="form-control" value="{{ $user->website }}">
+                    </div>
+                </div>
+
+                 <div class="row form-group">
+                    <div class="col col-md-3"><label for="image" class=" form-control-label"> Image</label></div>
                     <div class="col-12 col-md-9">
                     <img src="{{(!empty($user->image))?url('upload/userimage/'.$user->image):url('upload/usernoimage.jpg')}}" alt="{{ $user->image }}" width="50px" height="50px" />
 

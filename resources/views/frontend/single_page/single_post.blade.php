@@ -87,7 +87,7 @@
                                         <li><a href="#" id="whatsapp-btn"><i class="fa fa-share-square" aria-hidden="true" class="btn btn-primary" style="color:lightblue;font-size:2rem;padding: 5px"></i></a></li>
 
                                         </ul> --}}
-                                    <button class="btn btn-primary p-2" id="share-btn2" ><i class="fa fa-share"></i> Share</button> 
+                                   {{--  <button class="btn btn-primary p-2" id="share-btn2" ><i class="fa fa-share"></i> Share</button>  --}}
                                 </div><!-- end post-sharing -->
                             </div><!-- end title -->
 
@@ -141,22 +141,22 @@
 
                                 <div class="post-sharing mt-3" id="social-links">
                                     <ul class="list-inline">
-                                        <div class="addthis_inline_share_toolbox_zvrc "></div>
+                                       {{--  <div class="addthis_inline_share_toolbox_zvrc "></div> --}}
                                       {{--   <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
                                         <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
                                         <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li> --}}
 
-                                          {{-- <li><a href="#" ><i class="fa fa-envelope-o" aria-hidden="true" class="btn btn-primary" style="color:#cf3e39;font-size:2rem;padding: 5px"></i></a></li>
+                                          <li><a href="#" id="gmail-btn"><i class="fa fa-envelope-o" aria-hidden="true" class="btn btn-primary" style="color:#cf3e39;font-size:2rem;padding: 5px"></i></a></li>
 
-                                        <li><a href="#" ><i class="fa fa-facebook-square" aria-hidden="true" class="btn btn-primary" style="color:#3b5998;font-size:2rem;padding: 5px"></i></a></li>
+                                        <li><a href="#" id="facebook-btn"><i class="fa fa-facebook-square" aria-hidden="true" class="btn btn-primary" style="color:#3b5998;font-size:2rem;padding: 5px"></i></a></li>
 
-                                        <li><a href="#" ><i class="fa fa-google-plus-square" aria-hidden="true" class="btn btn-primary" style="color:#dd4b39;font-size:2rem;padding: 5px"></i></a></li>
+                                        <li><a href="#" id="gplus-btn"><i class="fa fa-google-plus-square" aria-hidden="true" class="btn btn-primary" style="color:#dd4b39;font-size:2rem;padding: 5px"></i></a></li>
 
-                                        <li><a href="#" ><i class="fa fa-twitter-square" aria-hidden="true" class="btn btn-primary" style="color:#1da1f2;font-size:2rem;padding: 5px"></i></a></li>
+                                        <li><a href="#" id="twitter-btn"><i class="fa fa-twitter-square" aria-hidden="true" class="btn btn-primary" style="color:#1da1f2;font-size:2rem;padding: 5px"></i></a></li>
 
-                                        <li><a href="#" ><i class="fa fa-linkedin-square" aria-hidden="true" class="btn btn-primary" style="color:#0077b5;font-size:2rem;padding: 5px"></i></a></li>
+                                        <li><a href="#" id="linkedin-btn"><i class="fa fa-linkedin-square" aria-hidden="true" class="btn btn-primary" style="color:#0077b5;font-size:2rem;padding: 5px"></i></a></li>
 
-                                        <li><a href="#" ><i class="fa fa-whatsapp" aria-hidden="true" class="btn btn-primary" style="color:lightgreen;font-size:2rem;padding: 5px"></i></a></li> --}}
+                                        <li><a href="#" id="whatsapp-btn"><i class="fa fa-whatsapp" aria-hidden="true" class="btn btn-primary" style="color:lightgreen;font-size:2rem;padding: 5px"></i></a></li>
                                     </ul>
 
                                     <button class="btn btn-primary p-2"   id="share-btn"><i class="fa fa-share"></i> Share</button>
@@ -184,15 +184,18 @@
 
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                         <h4><a href="#">{{ $post->user->name }}</a></h4>
-                                        <p>{!! $post->user->about !!}</p>
+                                        <p> Email : {{ $post->user->email }}</p>
+                                        <p> Ocouption : {{ $post->user->ocap }}</p>
+                                        {{-- <p>{!! $post->user->about !!}</p> --}}
 
                                         <div class="topsocial">
-                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
-                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i class="fa fa-youtube"></i></a>
-                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
-                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
-                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
-                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Website"><i class="fa fa-link"></i></a>
+                                            <a target="_blank" href="{{ $post->user->facebook }}" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
+                                            <a target="_blank" href="{{ $post->user->youtube }}" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i class="fa fa-youtube"></i></a>
+                                            <a target="_blank" href="{{ $post->user->twitter }}" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                            <a target="_blank" href="{{ $post->user->instagram }}" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
+                                           {{--  <a target="_blank" href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a> --}}
+                                            <a target="_blank" href="{{ $post->user->website }}" data-toggle="tooltip" data-placement="bottom" title="Website"><i class="fa fa-internet-explorer"></i></a>
+                                            
                                         </div><!-- end social -->
 
                                     </div><!-- end col -->
@@ -204,41 +207,36 @@
                             <div class="custombox clearfix">
                                 <h4 class="small-title">You may also like</h4>
                                 <div class="row">
+                                    @foreach($populars as $popular)
                                     <div class="col-lg-6">
                                         <div class="blog-box">
                                             <div class="post-media">
                                                 <a href="garden-single.html" title="">
-                                                    <img src="{{ asset('frontend') }}/upload/garden_single_03.jpg" alt="" class="img-fluid">
+                                                    <img src="{{(!empty($popular->image))?url('storage/post/'.$popular->image):url('upload/usernoimage.jpg')}}" alt="" class="img-fluid" style="width:400px;height: 200px">
                                                     <div class="hovereffect">
                                                         <span class=""></span>
                                                     </div><!-- end hover -->
                                                 </a>
                                             </div><!-- end media -->
                                             <div class="blog-meta">
-                                                <h4><a href="garden-single.html" title="">We are guests of ABC Design Studio</a></h4>
-                                                <small><a href="blog-category-01.html" title="">Trends</a></small>
-                                                <small><a href="blog-category-01.html" title="">21 July, 2017</a></small>
-                                            </div><!-- end meta -->
-                                        </div><!-- end blog-box -->
-                                    </div><!-- end col -->
+                                                <h4><a href="garden-single.html" title="">{{ Str::limit($popular->title, 30) }}</a></h4>
+                                                <small><a href="blog-category-01.html" title="">{{ $popular->category->name }}</a></small>
+                                                <small><a href="blog-category-01.html" title="">{{ $popular->created_at->diffForHumans() }}</a></small>
 
-                                    <div class="col-lg-6">
-                                        <div class="blog-box">
-                                            <div class="post-media">
-                                                <a href="garden-single.html" title="">
-                                                    <img src="{{ asset('frontend') }}/upload/garden_single_02.jpg" alt="" class="img-fluid">
-                                                    <div class="hovereffect">
-                                                        <span class=""></span>
-                                                    </div><!-- end hover -->
-                                                </a>
-                                            </div><!-- end media -->
-                                            <div class="blog-meta">
-                                                <h4><a href="garden-single.html" title="">Nostalgia at work with family</a></h4>
-                                                <small><a href="blog-category-01.html" title="">News</a></small>
-                                                <small><a href="blog-category-01.html" title="">20 July, 2017</a></small>
+                                        
+                                         <small><a href="garden-category.html" title=""><i class="fa fa-eye"></i> {{ $popular->view_count }}</a></small>
+                                          @guest
+                                        <small><i class="fa fa-heart"> {{ $popular->likedUsers->count() }}</i></small>
+                                        @else
+                                        <small><i style="color:{{ Auth::user()->likedPosts()->where('post_id',$popular->id)->count() > 0  ? 'red'  : '' }}" class="fa fa-heart"> {{ $popular->likedUsers->count() }}</i></small>
+                                        @endguest
+                                      <small><a href="{{route('single_post',$popular->slug) }}" title=""><i class="fa fa-comment-o"></i> {{ $popular->comments->count('id') }}</a></small>
+                                      <small><a href="#" title=""> by {{ $popular->user->name }}</a></small>
                                             </div><!-- end meta -->
                                         </div><!-- end blog-box -->
                                     </div><!-- end col -->
+                                    @endforeach
+                                   
                                 </div><!-- end row -->
                             </div><!-- end custom-box -->
 
@@ -333,8 +331,8 @@
                             </div>
                             @endguest
                          
-                        </div><!-- end page-wrapper -->
-                    </div><!-- end col -->
+                        
+                    </div> <!-- end col -->
 
                      @include('frontend.layouts.sidebar')
                 </div><!-- end row -->
@@ -482,15 +480,19 @@
     const facebookBtn = document.getElementById('facebook-btn');
     const gplusBtn = document.getElementById('gplus-btn');
     const twitterBtn = document.getElementById('twitter-btn');
-    const linkedBtn = document.getElementById('linked-btn');
+    const linkedinBtn = document.getElementById('linkedin-btn');
     const whatsappBtn = document.getElementById('whatsapp-btn');
-    // const socialBtn = document.getElementById('social-links');
+    const socialBtn = document.getElementById('social-links');
 
     let postUrl = encodeURI(document.location.href);
     let postTitle = encodeURI('{{ $post->title }}');
 
     facebookBtn.setAttribute("href",`https://www.facebook.com/sharer.php?u=${postUrl}`);
-    gmailBtn.setAttribute("href",`https://www.mail.google.com/mail/?view=cm&su=${postTitle}&body=${postUrl}`);
+    twitterBtn.setAttribute("href", `https://twitter.com/share?url=${postUrl}&text=${postTitle}`);
+    linkedinBtn.setAttribute("href", `https://www.linkedin.com/shareArticle?url=${postUrl}&title=${postTitle}`);
+    whatsappBtn.setAttribute("href",`https://wa.me/?text=${postTitle} ${postUrl}`);
+    gmailBtn.setAttribute("href",`https://mail.google.com/mail/?view=cm&su=${postTitle}&body=${postUrl}`);
+    gplusBtn.setAttribute("href",`https://plus.google.com/share?url=${postUrl}`);
 
 // Share Button
 const shareBtn = document.getElementById('share-btn');
@@ -498,7 +500,7 @@ const shareBtn2 = document.getElementById('share-btn2');
 
 if(navigator.share){
 shareBtn.style.display ='block';
-// socialBtn.style.display = 'block';
+socialBtn.style.display = 'block';
 shareBtn.addEventListener('click',() =>{
 navigator.share({
 title:postTitle,
@@ -516,8 +518,8 @@ console.log(error);
 
 if(navigator.share){
 shareBtn2.style.display ='block';
-// socialBtn.style.display = 'block';
-shareBtn2.addEventListener('click',() =>{
+socialBtn.style.display = 'block';
+shareBtn.addEventListener('click',() =>{
 navigator.share({
 title:postTitle,
 url:postUrl
@@ -531,6 +533,8 @@ console.log(error);
 
 
 }
+
+
 
 
 </script>

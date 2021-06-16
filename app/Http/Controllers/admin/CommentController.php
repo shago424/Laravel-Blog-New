@@ -21,15 +21,12 @@ class CommentController extends Controller
     }
 
     public function delete($id){
-    
      
         $comment = Comment::findorfail($id);
         
         $comment->delete();
         Toastr::success('Comment Deleted Successfully');
-            return redirect()->back();
-      
-       
+            return redirect()->back();  
 
     }
 

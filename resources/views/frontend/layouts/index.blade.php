@@ -18,6 +18,8 @@
     
     <!-- Site Metas -->
     <title>Blog</title>
+   <link rel="icon" type="text/png" href="{{ asset('upload') }}/icon.png" style="height: 50px;width: 50px
+   ;">
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">

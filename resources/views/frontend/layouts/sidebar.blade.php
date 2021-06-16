@@ -79,6 +79,17 @@
                                      
                                     </div>
                                 </div><!-- end blog-list -->
-                            </div><!-- end widget -->
+                            </div>
+
+                             <div class="widget">
+                                <h2 class="widget-title">Popular Tags</h2>
+                                <div class="link-widget">
+                                    @foreach($tags as $tag)
+                                    <small><a  href="{{ route('all-tag',$tag->name) }}" title=""> <span  style="padding: 2px;font-size: 15px;margin:2px;font-weight: bolder;">{{$tag->name}}</span> </a></small>
+                                    @endforeach
+                                </div><!-- end link-widget -->
+                            </div>
+
+                            <!-- end widget -->
                         </div><!-- end sidebar -->
                     </div><!-- end col -->

@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Str;
 use Auth;
 use App\Models\User;
+use App\Models\Contact;
 use Session;
 class FrontendController extends Controller
 {
@@ -21,6 +22,7 @@ class FrontendController extends Controller
         $data['populars'] = Post::inRandomOrder()->where('status',1)->limit(4)->get();
         $data['recents'] = Post::latest()->limit(4)->get();
         $data['hots'] = Post::latest()->where('status',1)->paginate(5);
+        $data['tags'] = Tag::all();
          $data['importants'] = Post::inRandomOrder()->where('status',1)->paginate(5);
         $data['first_sections'] = Post::inRandomOrder()->where('status',1)->limit(3)->get();
         $data['sidebar_categories'] = Category::where('status',1)->get();
@@ -38,9 +40,6 @@ class FrontendController extends Controller
             Session::put($postKey,1);
         }
 
-
-
-
         $data['post'] = Post::where('slug',$slug)->first();
          $data['populars'] = Post::inRandomOrder()->where('status',1)->limit(4)->get();
         $data['recents'] = Post::latest()->where('status',1)->limit(4)->get();
@@ -49,6 +48,8 @@ class FrontendController extends Controller
          $data['hots'] = Post::latest()->where('status',1)->paginate(5);
          $data['importants'] = Post::inRandomOrder()->where('status',1)->paginate(5);
         $data['first_sections'] = Post::inRandomOrder()->where('status',1)->limit(3)->get();
+         $data['populars'] = Post::inRandomOrder()->where('status',1)->limit(2)->get();
+         $data['tags'] = Tag::all();
         return view('frontend.single_page.single_post',$data);
     }
 
@@ -66,6 +67,7 @@ class FrontendController extends Controller
          $data['hots'] = Post::latest()->where('status',1)->where('status',1)->paginate(5);
          $data['importants'] = Post::inRandomOrder()->where('status',1)->where('status',1)->paginate(5);
         $data['first_sections'] = Post::inRandomOrder()->where('status',1)->where('status',1)->limit(3)->get();
+         $data['tags'] = Tag::all();
         return view('frontend.single_page.allcategory_post',$data);
     }
 
@@ -82,6 +84,7 @@ class FrontendController extends Controller
          $data['hots'] = Post::latest()->where('status',1)->paginate(5);
          $data['importants'] = Post::inRandomOrder()->where('status',1)->paginate(5);
         $data['first_sections'] = Post::inRandomOrder()->where('status',1)->limit(3)->get();
+         $data['tags'] = Tag::all();
         return view('frontend.single_page.alltag_post',$data);
     }
 
@@ -105,6 +108,7 @@ class FrontendController extends Controller
          $data['hots'] = Post::latest()->where('status',1)->where('status',1)->paginate(5);
          $data['importants'] = Post::inRandomOrder()->where('status',1)->where('status',1)->paginate(5);
         $data['first_sections'] = Post::inRandomOrder()->where('status',1)->where('status',1)->limit(3)->get();
+         $data['tags'] = Tag::all();
         return view('frontend.single_page.search',$data);
     }
 
@@ -119,5 +123,37 @@ class FrontendController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    // contact User
+
+    public function contactView(){
+
+        $data['header_categories'] = Category::where('status',1)->get();
+        return view('frontend.single_page.contact-us',$data);
+
+    }
+
+     public function contactStroe(Request $request){
+
+        $this->validate($request,[ 
+            'name' =>'required',
+            'email' =>'required|email',
+            'mobile' =>'required',
+            'subject' =>'required',
+            'message' =>'required'
+
+        ]);
+
+        $contact = new Contact();
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->mobile = $request->mobile;
+        $contact->subject = $request->subject;
+        $contact->message = $request->message;
+        $contact->save();
+
+        return redirect()->back()->with('success','Message Sent Successfully');
+
     }
 }

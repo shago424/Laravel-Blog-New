@@ -31,19 +31,22 @@
                         <a href="{{ route('user.list') }}"> <i class="menu-icon fa fa-users "></i>Users </a>
                     </li>
                     <li class="{{ request()->is('admin/category-list') ? 'active' : '' }}">
-                        <a href="{{ route('category.list') }}"> <i class="menu-icon fa fa-users "></i>Category </a>
+                        <a href="{{ route('category.list') }}"> <i class="menu-icon fa fa-certificate "></i>Category </a>
                     </li>
                     <li class="{{ request()->is('admin/post-list') ? 'active' : '' }}">
-                        <a href="{{ route('post.list') }}"> <i class="menu-icon fa fa-users "></i>Post </a>
+                        <a href="{{ route('post.list') }}"> <i class="menu-icon fa fa-paper-plane "></i>Post </a>
                     </li>
                     <li class="{{ request()->is('admin/comment-list') ? 'active' : '' }}">
-                        <a href="{{ route('comment.list') }}"> <i class="menu-icon fa fa-comment "></i>Comment </a>
+                        <a  href="{{ route('comment.list') }}"> <i class="menu-icon fa fa-comment "></i>Comment </a>
                     </li>
                     <li class="{{ request()->is('admin/comment/reply-list') ? 'active' : '' }}">
-                        <a href="{{ route('admin.comment.reply.list') }}"> <i class="menu-icon fa fa-comment "></i>Comment Reply </a>
+                        <a href="{{ route('admin.comment.reply.list') }}"> <i class="menu-icon fa fa-comments "></i>Comment Reply </a>
                     </li>
                     <li class="{{ request()->is('admin/liked-post') ? 'active' : '' }}">
                         <a href="{{ route('admin.post.like') }}"> <i class="menu-icon fa fa-heart "></i>Favourite Posts </a>
+                    </li>
+                    <li class="{{ request()->is('admin/contact-list') ? 'active' : '' }}">
+                        <a href="{{ route('contact.list') }}"> <i class="menu-icon fa fa-address-book "></i>Contacts </a>
                     </li>
                     {{--  <h3 class="menu-title">Setups</h3><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
@@ -87,15 +90,15 @@
                     </li>
                     <h3 class="menu-title">Setups</h3><!-- /.menu-title -->
                      <li class="{{ request()->is('user/post-list') ? 'active' : '' }}">
-                        <a href="{{ route('user.post.list') }}"> <i class="menu-icon fa fa-file "></i>Post </a>
+                        <a href="{{ route('user.post.list') }}"> <i class="menu-icon fa fa-paper-plane "></i>Post </a>
                     </li>
                      
                     <li class="{{ request()->is('user/comment-list') ? 'active' : '' }}">
-                        <a href="{{ route('user.comment.list') }}"> <i class="menu-icon fa fa-comment "></i>Comment </a>
+                        <a  href="{{ route('user.comment.list') }}"> <i class="menu-icon fa fa-comment "></i>Comment </a>
                     </li>
 
                     <li class="{{ request()->is('user/comment/reply-list') ? 'active' : '' }}">
-                        <a href="{{ route('user.comment.reply.list') }}"> <i class="menu-icon fa fa-comment "></i>Comment Reply </a>
+                        <a href="{{ route('user.comment.reply.list') }}"> <i class="menu-icon fa fa-comments "></i>Comment Reply </a>
                     </li>
                      <li class="{{ request()->is('user/liked-post--user') ? 'active' : '' }}">
                         <a href="{{ route('user.post.like') }}"> <i class="menu-icon fa fa-heart "></i>Favourite Posts </a>
