@@ -211,7 +211,7 @@
                                     <div class="col-lg-6">
                                         <div class="blog-box">
                                             <div class="post-media">
-                                                <a href="garden-single.html" title="">
+                                                <a href="{{ route('single_post',$popular->slug) }}" title="">
                                                     <img src="{{(!empty($popular->image))?url('storage/post/'.$popular->image):url('upload/usernoimage.jpg')}}" alt="" class="img-fluid" style="width:400px;height: 200px">
                                                     <div class="hovereffect">
                                                         <span class=""></span>
@@ -219,8 +219,8 @@
                                                 </a>
                                             </div><!-- end media -->
                                             <div class="blog-meta">
-                                                <h4><a href="garden-single.html" title="">{{ Str::limit($popular->title, 30) }}</a></h4>
-                                                <small><a href="blog-category-01.html" title="">{{ $popular->category->name }}</a></small>
+                                                <h4><a href="{{ route('single_post',$popular->slug) }}" title="">{{ Str::limit($popular->title, 30) }}</a></h4>
+                                                <small><a href="{{ route('all-category',$popular->category->slug) }}" title="">{{ $popular->category->name }}</a></small>
                                                 <small><a href="blog-category-01.html" title="">{{ $popular->created_at->diffForHumans() }}</a></small>
 
                                         

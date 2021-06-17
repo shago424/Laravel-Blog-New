@@ -87,7 +87,7 @@
                                             </div>
                                              <div class="row form-group ">
                                                 <div class="col col-md-3"><label for="title" class=" form-control-label ">Title</label></div>
-                                                <div class="col-12 col-md-9"><input type="text" id="title" name="title" placeholder="Enter title" class="form-control" class="@error('title') is-invalid @enderror"><span class="help-block">{{-- <font style="color:red">{{($errors)->has('title')?($errors->first('title')):''}}</font> --}}</span></div>
+                                                <div class="col-12 col-md-9"><input type="text" id="title" name="title" placeholder="Enter title" value="{{ old('title') }}" class="form-control" class="@error('title') is-invalid @enderror"><span class="help-block">{{-- <font style="color:red">{{($errors)->has('title')?($errors->first('title')):''}}</font> --}}</span></div>
                                                {{--  @error('title')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror --}}
@@ -95,7 +95,7 @@
 
                                              <div class="row form-group ">
                                                 <div class="col col-md-3"><label for="tags" class=" form-control-label ">Tags (Separated)</label></div>
-                                                <div class="col-12 col-md-9"><input type="text" id="tags" name="tags" placeholder="Enter Tag (Separated)" class="form-control" class="@error('tag') is-invalid @enderror"><span class="help-block">{{-- <font style="color:red">{{($errors)->has('tags')?($errors->first('tags')):''}}</font> --}}</span></div>
+                                                <div class="col-12 col-md-9"><input type="text" value="{{ old('name') }}" id="tags" name="tags" placeholder="Enter Tag (Separated)" class="form-control" class="@error('tag') is-invalid @enderror"><span class="help-block">{{-- <font style="color:red">{{($errors)->has('tags')?($errors->first('tags')):''}}</font> --}}</span></div>
                                                {{--  @error('tags')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror --}}
@@ -103,13 +103,13 @@
                                           
                                            <div class="row form-group">
                                                 <div class="col col-md-3"><label for="body" class=" form-control-label">Description</label></div>
-                                                <div class="col-12 col-md-9" ><textarea type="text"  name="body" placeholder="Enter Description" id="summernote" class="form-control" rows="3"></textarea><span class="help-block"><font style="color:red">{{($errors)->has('body')?($errors->first('body')):''}}</font></span></div>
+                                                <div class="col-12 col-md-9" ><textarea type="text" value="{{ old('description') }}" name="body" placeholder="Enter Description" id="summernote" class="form-control" rows="3"></textarea><span class="help-block"><font style="color:red">{{($errors)->has('body')?($errors->first('body')):''}}</font></span></div>
                                             </div>
                                              <div class="row form-group ">
                                                 <div class="col col-md-3"><label for="image" class=" form-control-label">Image</label></div>
                                                 <div class="col-12 col-md-9">
                                                     <img src="{{url('upload/usernoimage.jpg')}}" width="50px" height="50px" />
-                                                  <input type="file" id="image" name="image"  class="form-control" ><span class="help-block">
+                                                  <input type="file" id="image" name="image"  class="form-control" value="{{ old('image') }}"><span class="help-block">
                                                     <span class="help-block">{{-- <font style="color:red">{{($errors)->has('image')?($errors->first('image')):''}}</font> --}}</span></div>
                                             </div>
                                            
